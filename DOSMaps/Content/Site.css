@@ -1,11 +1,22 @@
-﻿body{
-    border: 1px solid black;
+﻿.map-html{
+    height:100%;
 }
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+.map-body{
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    height:100%;
+}
+
+.map{
+    flex: 1;
+    background-color:red;
+}
+
+.control-panel{
+    background-color:blue;
+    height:75px;
+    padding:5px;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
@@ -15,3 +26,14 @@ textarea {
     max-width: 280px;
 }
 
+@media screen and (max-width: 780px) {
+    .map{
+        background-color: green;
+    }
+}
+
+@media screen and (max-width: 460px) {
+    .map{
+        background-color: white;
+    }
+}
