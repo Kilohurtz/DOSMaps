@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="test.css"?>
+
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="svg2985" viewBox="82.992 45.607 2528.5721 1428.3294" width="2560" height="1314">
   <title>World Map</title>
-  <style id="style_css_sheet" type="text/css"> 
+  <style id="style_css_sheet" type="text/css" href="test.css"> 
 /*
  * Below are Cascading Style Sheet (CSS) definitions in use in this file,
  * which allow easily changing how countries are displayed.
