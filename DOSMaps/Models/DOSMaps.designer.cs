@@ -30,15 +30,18 @@ namespace DOSMaps.Models
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertChurch(Church instance);
-    partial void UpdateChurch(Church instance);
-    partial void DeleteChurch(Church instance);
+    partial void InsertChunk(Chunk instance);
+    partial void UpdateChunk(Chunk instance);
+    partial void DeleteChunk(Chunk instance);
     partial void InsertContinent(Continent instance);
     partial void UpdateContinent(Continent instance);
     partial void DeleteContinent(Continent instance);
     partial void InsertCountry(Country instance);
     partial void UpdateCountry(Country instance);
     partial void DeleteCountry(Country instance);
+    partial void InsertPart(Part instance);
+    partial void UpdatePart(Part instance);
+    partial void DeletePart(Part instance);
     #endregion
 		
 		public DOSMapsDataContext() : 
@@ -71,11 +74,11 @@ namespace DOSMaps.Models
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Church> Churches
+		public System.Data.Linq.Table<Chunk> Chunks
 		{
 			get
 			{
-				return this.GetTable<Church>();
+				return this.GetTable<Chunk>();
 			}
 		}
 		
@@ -94,35 +97,68 @@ namespace DOSMaps.Models
 				return this.GetTable<Country>();
 			}
 		}
+		
+		public System.Data.Linq.Table<Part> Parts
+		{
+			get
+			{
+				return this.GetTable<Part>();
+			}
+		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Church")]
-	public partial class Church : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Chunk")]
+	public partial class Chunk : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _ID;
+		private string _ID;
 		
-		private string _Name;
+		private System.Nullable<int> _Type;
+		
+		private string _ShortName;
+		
+		private string _LongName;
+		
+		private string _FullDescription;
+		
+		private System.Nullable<System.Guid> _Continent_ID;
+		
+		private EntitySet<Country> _Countries;
+		
+		private EntitySet<Part> _Parts;
+		
+		private EntityRef<Continent> _Continent;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnIDChanging(int value);
+    partial void OnIDChanging(string value);
     partial void OnIDChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
+    partial void OnTypeChanging(System.Nullable<int> value);
+    partial void OnTypeChanged();
+    partial void OnShortNameChanging(string value);
+    partial void OnShortNameChanged();
+    partial void OnLongNameChanging(string value);
+    partial void OnLongNameChanged();
+    partial void OnFullDescriptionChanging(string value);
+    partial void OnFullDescriptionChanged();
+    partial void OnContinent_IDChanging(System.Nullable<System.Guid> value);
+    partial void OnContinent_IDChanged();
     #endregion
 		
-		public Church()
+		public Chunk()
 		{
+			this._Countries = new EntitySet<Country>(new Action<Country>(this.attach_Countries), new Action<Country>(this.detach_Countries));
+			this._Parts = new EntitySet<Part>(new Action<Part>(this.attach_Parts), new Action<Part>(this.detach_Parts));
+			this._Continent = default(EntityRef<Continent>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="NChar(4) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string ID
 		{
 			get
 			{
@@ -141,22 +177,166 @@ namespace DOSMaps.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string Name
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="Int")]
+		public System.Nullable<int> Type
 		{
 			get
 			{
-				return this._Name;
+				return this._Type;
 			}
 			set
 			{
-				if ((this._Name != value))
+				if ((this._Type != value))
 				{
-					this.OnNameChanging(value);
+					this.OnTypeChanging(value);
 					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
+					this._Type = value;
+					this.SendPropertyChanged("Type");
+					this.OnTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShortName", DbType="NVarChar(12)")]
+		public string ShortName
+		{
+			get
+			{
+				return this._ShortName;
+			}
+			set
+			{
+				if ((this._ShortName != value))
+				{
+					this.OnShortNameChanging(value);
+					this.SendPropertyChanging();
+					this._ShortName = value;
+					this.SendPropertyChanged("ShortName");
+					this.OnShortNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LongName", DbType="NVarChar(40)")]
+		public string LongName
+		{
+			get
+			{
+				return this._LongName;
+			}
+			set
+			{
+				if ((this._LongName != value))
+				{
+					this.OnLongNameChanging(value);
+					this.SendPropertyChanging();
+					this._LongName = value;
+					this.SendPropertyChanged("LongName");
+					this.OnLongNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FullDescription", DbType="NVarChar(MAX)")]
+		public string FullDescription
+		{
+			get
+			{
+				return this._FullDescription;
+			}
+			set
+			{
+				if ((this._FullDescription != value))
+				{
+					this.OnFullDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._FullDescription = value;
+					this.SendPropertyChanged("FullDescription");
+					this.OnFullDescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Continent_ID", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> Continent_ID
+		{
+			get
+			{
+				return this._Continent_ID;
+			}
+			set
+			{
+				if ((this._Continent_ID != value))
+				{
+					if (this._Continent.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnContinent_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Continent_ID = value;
+					this.SendPropertyChanged("Continent_ID");
+					this.OnContinent_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Chunk_Country", Storage="_Countries", ThisKey="ID", OtherKey="Chunk_ID")]
+		public EntitySet<Country> Countries
+		{
+			get
+			{
+				return this._Countries;
+			}
+			set
+			{
+				this._Countries.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Chunk_Part", Storage="_Parts", ThisKey="ID", OtherKey="Chunk_ID")]
+		public EntitySet<Part> Parts
+		{
+			get
+			{
+				return this._Parts;
+			}
+			set
+			{
+				this._Parts.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Continent_Chunk", Storage="_Continent", ThisKey="Continent_ID", OtherKey="ID", IsForeignKey=true)]
+		public Continent Continent
+		{
+			get
+			{
+				return this._Continent.Entity;
+			}
+			set
+			{
+				Continent previousValue = this._Continent.Entity;
+				if (((previousValue != value) 
+							|| (this._Continent.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Continent.Entity = null;
+						previousValue.Chunks.Remove(this);
+					}
+					this._Continent.Entity = value;
+					if ((value != null))
+					{
+						value.Chunks.Add(this);
+						this._Continent_ID = value.ID;
+					}
+					else
+					{
+						this._Continent_ID = default(Nullable<System.Guid>);
+					}
+					this.SendPropertyChanged("Continent");
 				}
 			}
 		}
@@ -180,6 +360,30 @@ namespace DOSMaps.Models
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void attach_Countries(Country entity)
+		{
+			this.SendPropertyChanging();
+			entity.Chunk = this;
+		}
+		
+		private void detach_Countries(Country entity)
+		{
+			this.SendPropertyChanging();
+			entity.Chunk = null;
+		}
+		
+		private void attach_Parts(Part entity)
+		{
+			this.SendPropertyChanging();
+			entity.Chunk = this;
+		}
+		
+		private void detach_Parts(Part entity)
+		{
+			this.SendPropertyChanging();
+			entity.Chunk = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Continent")]
@@ -192,7 +396,7 @@ namespace DOSMaps.Models
 		
 		private string _Name;
 		
-		private EntitySet<Country> _Countries;
+		private EntitySet<Chunk> _Chunks;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -206,7 +410,7 @@ namespace DOSMaps.Models
 		
 		public Continent()
 		{
-			this._Countries = new EntitySet<Country>(new Action<Country>(this.attach_Countries), new Action<Country>(this.detach_Countries));
+			this._Chunks = new EntitySet<Chunk>(new Action<Chunk>(this.attach_Chunks), new Action<Chunk>(this.detach_Chunks));
 			OnCreated();
 		}
 		
@@ -250,16 +454,16 @@ namespace DOSMaps.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Continent_Country", Storage="_Countries", ThisKey="ID", OtherKey="Continent_ID")]
-		public EntitySet<Country> Countries
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Continent_Chunk", Storage="_Chunks", ThisKey="ID", OtherKey="Continent_ID")]
+		public EntitySet<Chunk> Chunks
 		{
 			get
 			{
-				return this._Countries;
+				return this._Chunks;
 			}
 			set
 			{
-				this._Countries.Assign(value);
+				this._Chunks.Assign(value);
 			}
 		}
 		
@@ -283,13 +487,13 @@ namespace DOSMaps.Models
 			}
 		}
 		
-		private void attach_Countries(Country entity)
+		private void attach_Chunks(Chunk entity)
 		{
 			this.SendPropertyChanging();
 			entity.Continent = this;
 		}
 		
-		private void detach_Countries(Country entity)
+		private void detach_Chunks(Chunk entity)
 		{
 			this.SendPropertyChanging();
 			entity.Continent = null;
@@ -302,34 +506,37 @@ namespace DOSMaps.Models
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _ID;
+		private System.Guid _ID;
 		
 		private string _Name;
 		
-		private System.Nullable<System.Guid> _Continent_ID;
+		private string _Chunk_ID;
 		
-		private EntityRef<Continent> _Continent;
+		private EntitySet<Part> _Parts;
+		
+		private EntityRef<Chunk> _Chunk;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnIDChanging(string value);
+    partial void OnIDChanging(System.Guid value);
     partial void OnIDChanged();
     partial void OnNameChanging(string value);
     partial void OnNameChanged();
-    partial void OnContinent_IDChanging(System.Nullable<System.Guid> value);
-    partial void OnContinent_IDChanged();
+    partial void OnChunk_IDChanging(string value);
+    partial void OnChunk_IDChanged();
     #endregion
 		
 		public Country()
 		{
-			this._Continent = default(EntityRef<Continent>);
+			this._Parts = new EntitySet<Part>(new Action<Part>(this.attach_Parts), new Action<Part>(this.detach_Parts));
+			this._Chunk = default(EntityRef<Chunk>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="NChar(2) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid ID
 		{
 			get
 			{
@@ -368,60 +575,277 @@ namespace DOSMaps.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Continent_ID", DbType="UniqueIdentifier")]
-		public System.Nullable<System.Guid> Continent_ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Chunk_ID", DbType="NChar(4)")]
+		public string Chunk_ID
 		{
 			get
 			{
-				return this._Continent_ID;
+				return this._Chunk_ID;
 			}
 			set
 			{
-				if ((this._Continent_ID != value))
+				if ((this._Chunk_ID != value))
 				{
-					if (this._Continent.HasLoadedOrAssignedValue)
+					if (this._Chunk.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnContinent_IDChanging(value);
+					this.OnChunk_IDChanging(value);
 					this.SendPropertyChanging();
-					this._Continent_ID = value;
-					this.SendPropertyChanged("Continent_ID");
-					this.OnContinent_IDChanged();
+					this._Chunk_ID = value;
+					this.SendPropertyChanged("Chunk_ID");
+					this.OnChunk_IDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Continent_Country", Storage="_Continent", ThisKey="Continent_ID", OtherKey="ID", IsForeignKey=true)]
-		public Continent Continent
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Country_Part", Storage="_Parts", ThisKey="ID", OtherKey="Country_ID")]
+		public EntitySet<Part> Parts
 		{
 			get
 			{
-				return this._Continent.Entity;
+				return this._Parts;
 			}
 			set
 			{
-				Continent previousValue = this._Continent.Entity;
+				this._Parts.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Chunk_Country", Storage="_Chunk", ThisKey="Chunk_ID", OtherKey="ID", IsForeignKey=true)]
+		public Chunk Chunk
+		{
+			get
+			{
+				return this._Chunk.Entity;
+			}
+			set
+			{
+				Chunk previousValue = this._Chunk.Entity;
 				if (((previousValue != value) 
-							|| (this._Continent.HasLoadedOrAssignedValue == false)))
+							|| (this._Chunk.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Continent.Entity = null;
+						this._Chunk.Entity = null;
 						previousValue.Countries.Remove(this);
 					}
-					this._Continent.Entity = value;
+					this._Chunk.Entity = value;
 					if ((value != null))
 					{
 						value.Countries.Add(this);
-						this._Continent_ID = value.ID;
+						this._Chunk_ID = value.ID;
 					}
 					else
 					{
-						this._Continent_ID = default(Nullable<System.Guid>);
+						this._Chunk_ID = default(string);
 					}
-					this.SendPropertyChanged("Continent");
+					this.SendPropertyChanged("Chunk");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Parts(Part entity)
+		{
+			this.SendPropertyChanging();
+			entity.Country = this;
+		}
+		
+		private void detach_Parts(Part entity)
+		{
+			this.SendPropertyChanging();
+			entity.Country = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Part")]
+	public partial class Part : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _ID;
+		
+		private System.Nullable<System.Guid> _Country_ID;
+		
+		private string _Chunk_ID;
+		
+		private EntityRef<Chunk> _Chunk;
+		
+		private EntityRef<Country> _Country;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(System.Guid value);
+    partial void OnIDChanged();
+    partial void OnCountry_IDChanging(System.Nullable<System.Guid> value);
+    partial void OnCountry_IDChanged();
+    partial void OnChunk_IDChanging(string value);
+    partial void OnChunk_IDChanged();
+    #endregion
+		
+		public Part()
+		{
+			this._Chunk = default(EntityRef<Chunk>);
+			this._Country = default(EntityRef<Country>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Country_ID", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> Country_ID
+		{
+			get
+			{
+				return this._Country_ID;
+			}
+			set
+			{
+				if ((this._Country_ID != value))
+				{
+					if (this._Country.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCountry_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Country_ID = value;
+					this.SendPropertyChanged("Country_ID");
+					this.OnCountry_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Chunk_ID", DbType="NChar(4) NOT NULL", CanBeNull=false)]
+		public string Chunk_ID
+		{
+			get
+			{
+				return this._Chunk_ID;
+			}
+			set
+			{
+				if ((this._Chunk_ID != value))
+				{
+					if (this._Chunk.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnChunk_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Chunk_ID = value;
+					this.SendPropertyChanged("Chunk_ID");
+					this.OnChunk_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Chunk_Part", Storage="_Chunk", ThisKey="Chunk_ID", OtherKey="ID", IsForeignKey=true)]
+		public Chunk Chunk
+		{
+			get
+			{
+				return this._Chunk.Entity;
+			}
+			set
+			{
+				Chunk previousValue = this._Chunk.Entity;
+				if (((previousValue != value) 
+							|| (this._Chunk.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Chunk.Entity = null;
+						previousValue.Parts.Remove(this);
+					}
+					this._Chunk.Entity = value;
+					if ((value != null))
+					{
+						value.Parts.Add(this);
+						this._Chunk_ID = value.ID;
+					}
+					else
+					{
+						this._Chunk_ID = default(string);
+					}
+					this.SendPropertyChanged("Chunk");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Country_Part", Storage="_Country", ThisKey="Country_ID", OtherKey="ID", IsForeignKey=true)]
+		public Country Country
+		{
+			get
+			{
+				return this._Country.Entity;
+			}
+			set
+			{
+				Country previousValue = this._Country.Entity;
+				if (((previousValue != value) 
+							|| (this._Country.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Country.Entity = null;
+						previousValue.Parts.Remove(this);
+					}
+					this._Country.Entity = value;
+					if ((value != null))
+					{
+						value.Parts.Add(this);
+						this._Country_ID = value.ID;
+					}
+					else
+					{
+						this._Country_ID = default(Nullable<System.Guid>);
+					}
+					this.SendPropertyChanged("Country");
 				}
 			}
 		}

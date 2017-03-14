@@ -9,15 +9,16 @@ namespace DOSMaps.Controllers
 {
     public class AJAXController : Controller
     {
-        public String Index()
+        [HttpPost]
+        public List<Country> GetCountries()
         {
-            return "United States of America";
+            return Data.GetAllCountries();
         }
 
         [HttpPost]
-        public String UpdateSelectedCountry(String ID)
+        public Country GetSelectedCountry(Guid ID)
         {
-            return Data.GetCountry(ID).Name;
+            return Data.GetCountry(ID);
         }
     }
 }

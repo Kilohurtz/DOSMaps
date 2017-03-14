@@ -1,13 +1,13 @@
 ﻿$(document).ready(function () {
     $(".test").click(function () {
         alert("clicked!");
-        updateCountrySelected("US");
+        showPrayerNeeded();
     });
 });
 
 
-function updateCountrySelected(id) {
-    $.post("AJAX/UpdateSelectedCountry", { ID: id }, function (data) {
+function showPrayerNeeded() {
+    $.post("AJAX/GetAllCountries", {}, function (data) {
         alert("returned!");
         $(".test-text").html(data);
     });

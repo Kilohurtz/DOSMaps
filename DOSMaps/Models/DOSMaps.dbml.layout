@@ -2,29 +2,56 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="DOSMaps">
   <DataContextMoniker Name="/DOSMapsDataContext" />
   <nestedChildShapes>
-    <classShape Id="2c2c6bc3-53f1-4a9c-bcad-60f69ddf45a0" absoluteBounds="5.875, 3.125, 2, 1.1939925130208333">
-      <DataClassMoniker Name="/DOSMapsDataContext/Church" />
+    <classShape Id="6963e360-1fd1-422e-87ed-58addce2e7f4" absoluteBounds="7, 1.375, 2, 1.9631982421875">
+      <DataClassMoniker Name="/DOSMapsDataContext/Chunk" />
       <nestedChildShapes>
-        <elementListCompartment Id="bc425399-f94b-442f-a03d-bf012dce3c21" absoluteBounds="5.8900000000000006, 3.585, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="1b745cec-6930-45f3-a329-c5eee64cdf06" absoluteBounds="7.0150000000000006, 1.835, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="92cb2625-9e8c-44e1-b9ff-abf616046db8" absoluteBounds="3, 3.25, 2, 1.1939925130208333">
+    <classShape Id="a2598d83-257c-4640-bf3a-97d628b10360" absoluteBounds="3.875, 1, 2, 1.1939925130208333">
       <DataClassMoniker Name="/DOSMapsDataContext/Continent" />
       <nestedChildShapes>
-        <elementListCompartment Id="23e44d2d-7a99-49f0-908f-d2149870f846" absoluteBounds="3.0149999999999997, 3.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="28c3a2d4-5c1f-41ee-99da-46dd54893d3f" absoluteBounds="3.8900000000000006, 1.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="acef90cd-1bdb-4bcf-ba54-d9c0dba71c79" absoluteBounds="4.75, 1.125, 2, 1.3862939453125">
+    <associationConnector edgePoints="[(5.875 : 1.78449625651042); (7 : 1.78449625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DOSMapsDataContext/Continent/Continent_Chunk" />
+      <nodes>
+        <classShapeMoniker Id="a2598d83-257c-4640-bf3a-97d628b10360" />
+        <classShapeMoniker Id="6963e360-1fd1-422e-87ed-58addce2e7f4" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="e4bc1487-434d-4eb0-90c8-106c1f54033b" absoluteBounds="6.5, 4.25, 2, 1.3862939453125">
       <DataClassMoniker Name="/DOSMapsDataContext/Country" />
       <nestedChildShapes>
-        <elementListCompartment Id="ab22c0ff-d383-422a-8e3f-f1bba502f8c9" absoluteBounds="4.765, 1.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="9b4db2aa-1680-4f3e-a753-218d83badb12" absoluteBounds="6.5150000000000006, 4.71, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(3.8749995 : 3.25); (3.8749995 : 1.81814697265625); (4.75 : 1.81814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/DOSMapsDataContext/Continent/Continent_Country" />
+    <associationConnector edgePoints="[(7.75 : 3.3381982421875); (7.75 : 4.25)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DOSMapsDataContext/Chunk/Chunk_Country" />
       <nodes>
-        <classShapeMoniker Id="92cb2625-9e8c-44e1-b9ff-abf616046db8" />
-        <classShapeMoniker Id="acef90cd-1bdb-4bcf-ba54-d9c0dba71c79" />
+        <classShapeMoniker Id="6963e360-1fd1-422e-87ed-58addce2e7f4" />
+        <classShapeMoniker Id="e4bc1487-434d-4eb0-90c8-106c1f54033b" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="cdb26283-8435-4b7e-a8ee-c7e22ebabc61" absoluteBounds="3.75, 2.875, 2, 1.3862939453125">
+      <DataClassMoniker Name="/DOSMapsDataContext/Part" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c9df9609-b148-4320-8468-9b6f8d236bad" absoluteBounds="3.7649999999999997, 3.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(7 : 3.10659912109375); (5.75 : 3.10659912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DOSMapsDataContext/Chunk/Chunk_Part" />
+      <nodes>
+        <classShapeMoniker Id="6963e360-1fd1-422e-87ed-58addce2e7f4" />
+        <classShapeMoniker Id="cdb26283-8435-4b7e-a8ee-c7e22ebabc61" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(6.5 : 4.9487944453125); (4.75 : 4.9487944453125); (4.75 : 4.2612939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DOSMapsDataContext/Country/Country_Part" />
+      <nodes>
+        <classShapeMoniker Id="e4bc1487-434d-4eb0-90c8-106c1f54033b" />
+        <classShapeMoniker Id="cdb26283-8435-4b7e-a8ee-c7e22ebabc61" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>
