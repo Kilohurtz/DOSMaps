@@ -40,10 +40,10 @@ Project scope:
   Project Organization
   
   The Project is orgainized into 4 distinct portions.
-    Server Maintenance 
-    GUI interaction and layout
-    Interactive Map scripts
-    Javascripts dealing with server communication
+    Server Maintenance, 
+    GUI interaction and layout,
+    Interactive Map scripts,
+    Javascripts dealing with server communication.
     
     
    
