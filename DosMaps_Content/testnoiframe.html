@@ -1,17 +1,24 @@
 <html>
 
 <head>
-	<h1>LibPrint Administration Page</h1>
 	<meta http-equiv="Access-Control-Allow-Origin" content="*">
+	
 	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.6.2.min.js"></script>
 	<script src="test.js"></script>
-	<title>LibPrint Administration Page</title>
+	<script src="mapScripts.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="views.css">
+	
+	<title> Interactive Church Map</title>
+	<h1>Interactive Church Map</h1>
 </head>
 
 <body>
-	<button id="highlight">Refresh</button> 
-	<p id = "text"> temp\r\n</p>
-	<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="svg2985" viewBox="82.992 45.607 2528.5721 1428.3294" width="2560" height="1314">
+	<button id="highlight">Refresh</button>
+	
+	<div id="perspective" class="world">
+	<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="svg2985" viewBox="0 0 2528.5721 1500">
+	
   <title>World Map</title>
   <style>
 		@import url(test.css); 
@@ -3036,4 +3043,38 @@
     <circle id="tk." class="circlexx tk" r="6.01303" cy="840.579" cx="2708.51"/>
   </g>
 </svg>
+	</div>
+	
+	<div>
+		
+		<!--
+		dropdown menu
+		-->
+		<select id="continents">
+		
+			<option value="world">World</option>
+			<option value="asia">Asia</option>
+			<option value="africa">Africa</option>
+			<option value="oceania">Oceania</option>
+			<option value="europe">Europe</option>
+			<option value="north-america">North America</option>
+			<option value="south-america">South America</option>
+			
+		</select>
+			
+		<!--
+		radiobuttons
+		-->    
+		<form>
+			<input type="radio" name="radiobuttons" onclick="replacetext1()" value="churches/people" > 
+			churches/people <br>
+
+			<input type="radio" name="radiobuttons" onclick="replacetext2()" value="Praying_for" >
+			praying for <br>
+
+			<input type="radio" name="radiobuttons" onclick="replacetext3()" value="reciving_prayers_from" >
+			receiving prayers from <br>
+		</form>    
+		
+	</div> 
 </body>
