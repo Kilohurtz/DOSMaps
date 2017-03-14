@@ -1,0 +1,116 @@
+Documentation of Variables, methods, Libraies, and special notices for Web Base v.2.0
+Last Updated March 14,2017
+
+Table of Contents
+ I. Libraries
+ II. <div>
+ III.<select continentMenu>
+ IV. <form>
+  IV.A <p dropdownNotice>
+  IV.B <p infobut1>
+  IV.C <p infobut2>
+  IV.D <p infobut3>
+ V. radiobuttons
+  V.A radio1
+  V.B radio2
+  V.C radio3
+ VI. JavaScripts
+  VI.A replacetext1()
+  VI.B replacetext2()
+  VI.C replacetext3()
+  VI.D dropdownEvent()
+
+
+I. Libraries
+Library for jQuery. <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.6.2.min.js"></script>
+
+*NOTE*
+/* As of the most recent update, the insertion of the Library seems to be malfunctioning, so as of now all jQuery commands are commented and replaced with JavaScript 
+*/
+
+
+
+II. <div>
+
+The Div uses custom CSS modifications to set width and height to 70% to account for multiple screen sizes 
+ 
+ 
+ 
+ 
+  
+III.  select "continentMenu"
+ Has 6 dropdown options, one for each permanetly inhabitated contenint
+ Upon the selection of a continent, Calls the dropdownEvent() method (see section VI.D)  and stores the continent name in its value
+ calls the method each time the dropdown value changes
+
+Values within "continentMenu"
+ id="continentMenu"
+ name="continentMenu"
+ value=whatever is selected in the dropdown menu;
+ 
+
+
+IV. <form>
+
+ This sequence is created exclusively for debugging. Its purpose is to test whether eventhandlers are functioning properly.
+ 
+  IV.A <p dropdownNotice>
+   The debugging notifier for showing whether the dropdown event handler and functions are operating properly 
+   (See sections III and VI.D respectivly)
+ 
+  IV.B <p infobut1> 
+   The debugging notifier for showing if radio butto 1 is currently selected, should update dynamically.
+   (see section V.A and VI.A for relevent information)
+   
+  IV.B <p infobut2> 
+   The debugging notifier for showing if radio butto 2 is currently selected, should update dynamically.
+   (see section V.B and VI.B for relevent information) 
+ 
+  IV.B <p infobut3> 
+   The debugging notifier for showing if radio butto 3 is currently selected, should update dynamically.
+   (see section V.C and VI.C for relevent information)
+ 
+ 
+ 
+ V. Radiobuttons
+  These radio buttons select the mode that the map will run in, specifically church density, whose praying for the country, and who the country is praying for
+  currently these are connected to there corresponding debugging functions, detailed later.
+  All radiobuttons have the same name, thereby only letting one be selected at a time. 
+  input type="radio"
+  name="radiobuttons"
+  
+  
+  V.A radiobutton1
+    described with text "churches/people." when selected, calls the "replacetext1()" method (see section VI.A)
+    
+  V.B radiobutton2
+    described with text "praying for." when selected, calls the "replacetext2()" method (see section VI.B)
+ 
+  V.C radiobutton3
+    described with text "reciving prayers from." when selected, calls the "replacetext3()" method (see section VI.C)
+    
+    
+ VI. Javascript functions
+    These are the functions called by the eventhandlers throughout the HTML document. currently they just replace text, when combined with the javascripts of diffrent sections,they will communicate with the server.
+    *Note*
+    /* In comments are methods using jQuery, they are currently non-functional, but in theory would accomplish the same tasks as current functions.*/
+   
+   VI.A replacetext1()
+     is called by the selection of the first radio button (see section V.A) 
+     when active, replaces the strings in <p="infobut1"> with "button one clicked" and the strings in <p="infobut2> and <p="infobut3"> (see section IV.B,C,D) with "button not clicked"
+     in effect, this sets the other notifications to their original values, so as to only have one positive notification active at a time
+    
+   VI.B replacetext2()
+     is called by the selection of the second radio button (see section V.B) 
+     when active, replaces the strings in <p="infobut2"> with "button two clicked" and the strings in <p="infobut1> and <p="infobut3"> (see section IV.B,C,D) with "button not clicked"
+     in effect, this sets the other notifications to their original values, so as to only have one positive notification active at a time
+   
+   VI.C replacetext3()
+     is called by the selection of the third radio button (see section V.C) 
+     when active, replaces the strings in <p="infobut3"> with "button three clicked" and the strings in <p="infobut1> and <p="infobut2"> (see section IV.B,C,D) with "button not clicked"
+     in effect, this sets the other notifications to their original values, so as to only have one positive notification active at a time
+     
+   VI. dropdownEvent()
+    called by the <select continentMenu> dropdown menu. (see section III)
+    recives the value currently in the continentMenu and displays it in dropdownNotice (see section IV.A)
+    can be called dynamically
