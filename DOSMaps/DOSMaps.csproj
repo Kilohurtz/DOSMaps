@@ -178,6 +178,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DOSMaps.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Parser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
