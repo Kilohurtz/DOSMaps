@@ -1,0 +1,59 @@
+/*
+	This file includes the settings for the various continental views.
+*/
+
+.africa {height:40vw;  overflow: hidden; border:red solid 2px }
+.africa svg {
+    margin-left: -50%;
+	margin-top: -29%;
+    min-width:168%;
+    min-height:168%;
+}
+
+.asia {height:40vw;  overflow: hidden; border:red solid 2px }
+.asia svg {
+    margin-left: -150%;
+	margin-top: -9%;
+    min-width:100%;
+    min-height:100%;
+}
+
+.europe {height:40vw;  overflow: hidden; border:red solid 2px }
+.europe svg {
+    margin-left: -190%;
+	margin-top: -9%;
+    min-width:390%;
+    min-height:390%;
+}
+
+.south-america {height:40vw;  overflow: hidden; border:red solid 2px }
+.south-america svg {
+    margin-left: -30%;
+	margin-top: -56%;
+    min-width:230%;
+    min-height:230%;
+}
+
+.north-america {height:40vw;  overflow: hidden; border:red solid 2px }
+.north-america svg{
+	margin-left: -1%;
+	margin-top: -6%;
+    min-width:240%;
+    min-height:240%;
+}
+
+.oceania {height:40vw; overflow: hidden; border:red solid 2px }
+.oceania svg {
+    margin-left: -220%;
+	margin-top: -80%;
+    min-width:200%;
+    min-height:200%;
+}
+
+.world {height:40vw; overflow: hidden; border:red solid 2px }
+.world svg {
+	margin: 0 auto;
+	width:100%;
+	height:100%;
+	
+}
