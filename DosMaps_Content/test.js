@@ -1,4 +1,5 @@
-var toHighlight = [{id: ".us", value: 1000},{id: ".ar",value: 500},{id: ".ch",value: 10}]; //get json from server_daniel
+//var toHighlight = [{id: ".us", value: 1000},{id: ".ar",value: 500},{id: ".ch",value: 10}]; //get json from server_daniel
+var toHighlight = $json.get(
 
 $(document).ready(function() {
 	$("#highlight").click(function(event){
