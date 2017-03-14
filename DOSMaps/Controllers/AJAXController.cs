@@ -4,21 +4,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using Newtonsoft.Json;
 namespace DOSMaps.Controllers
 {
     public class AJAXController : Controller
     {
         [HttpPost]
-        public List<Country> GetCountries()
+        public String GetAllCountries()
         {
-            return Data.GetAllCountries();
+            
+            return JsonConvert.SerializeObject(Data.GetAllCountries(), Formatting.None, 
+            new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
         }
 
         [HttpPost]
-        public Country GetSelectedCountry(Guid ID)
+        public String GetSelectedCountry(Guid ID)
         {
-            return Data.GetCountry(ID);
+            return JsonConvert.SerializeObject(Data.GetCountry(ID));
         }
     }
 }
