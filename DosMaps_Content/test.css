@@ -11,12 +11,6 @@
  * Change opacity to 1 to display all circles.
  *
  */
- 
- svg{
-	 height: 100%;
-	 width: 100%;
- }
- 
 .circlexx
 {
    opacity:0;
@@ -136,7 +130,7 @@
  *
  * Color a few small country circles (and the countries):
  */
-  .us, .ar, .ch
+  .ms, .ky, .us
   {
      opacity:    1;
      fill:       #ff0000;
