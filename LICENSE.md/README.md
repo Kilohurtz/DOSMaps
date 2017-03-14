@@ -1,6 +1,8 @@
 # LightSys-Interactive-Map-
 Building an interactive map of local churches around the world.
 
+ Up to date as of March 14, 2017
+
 Project team members
   Judson Hayes of LeTourneau University
   Micah Richards of LeTourneau University
@@ -8,11 +10,12 @@ Project team members
   Shimon Rigdon of LeTourneau University
 Team Name - DOS & 1/2
 
-Project Origination-Larry Kraft (email:larrysteph@worksmail.net)
-Assistant expert- Bill Dickson (Phone: 719-209-8624)
+ Project Origination-Larry Kraft (email:larrysteph@worksmail.net)
+ Assistant expert- Bill Dickson (Phone: 719-209-8624)
+ One Challenge representive - Scott Cost (email:scottc@worksmail.net
 
-project start: March 13,2017 for LightSys Code-A-Thon
-Expected Finish Date: March 17, 2017
+ project start: March 13,2017 for LightSys Code-A-Thon
+ Expected Finish Date: March 17, 2017
 
 
 Project scope:
