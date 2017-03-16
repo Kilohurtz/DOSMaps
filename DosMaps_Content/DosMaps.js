@@ -7,10 +7,6 @@ $(document).ready(function() {
 		$("#perspective").removeClass().addClass($(this).val());
 	});
 	
-	$(".highlight").click(function(event){
-		allToBrown(blank);
-	})
-	
 	$("form input:radio").change(function(){
 		if ($(this).val() == "c/p"){
 			highlight(toHighlight1);
