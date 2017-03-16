@@ -9,21 +9,133 @@ namespace DOSMaps.Controllers
 {
     public class AJAXController : Controller
     {
+
         [HttpPost]
-        public String GetAllCountries()
+        public String ImportConversions(String str)
         {
+            //Import Country name to Country code reference file
+            List<String> conversions = str.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None).ToList();                                      // Split CSV by line
+            List<List<String>> rows = conversions.Select(m => m.Split(new char[] { ',' }, 2, StringSplitOptions.RemoveEmptyEntries).ToList()).ToList(); // Split each line by ','
+            rows = rows.Where(m => m.Count() != 0).ToList();                                                                                            // Remove empty entries
+            List<Conversion> conversionList = new List<Conversion>();
+
+            //Create a database row for each entry in the CSV
+            foreach(List<String> row in rows) 
+            {
+                Conversion cnv = new Conversion();
+                cnv.Code = row.First().ToLower();
+                cnv.CountryName = row.ElementAt(1).Replace("\"", "");
+                conversionList.Add(cnv);
+            }
+            Data.SaveConversions(conversionList); // Save to database
             
-            return JsonConvert.SerializeObject(Data.GetAllCountries(), Formatting.None, 
+            return "success!";
+        }
+
+        [HttpPost]
+        public String ImportData(String str)
+        {
+            //Import data about prayer per country
+            List<Conversion> conversions = Data.GetConversions();
+            List<Continent> contintents = Data.GetContinents();
+            List<String> input = str.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None).ToList();    // Split Tab delineated file by line
+            List<List<String>> rows = input.Select(m => m.Split(new char[] { '\t' }).ToList()).ToList();        // Split each line by tab
+            rows = rows.Where(m => m.Count() != 0).ToList();                                                    // Remove empty entries
+            List<Chunk> chunkList = new List<Chunk>();
+            List<Country> countryList = new List<Country>();
+            List<Part> partList = new List<Part>();
+            List<String> lookup = new List<String> { "Part", "Cntry", "Multi" };
+            foreach (List<String> row in rows)
+            {
+                Chunk chunk = Data.CreateChunk( ID: row.ElementAt(0),
+                                                type: lookup.IndexOf(row.ElementAt(2)),                                         //Type is stored by integer
+                                                continent_ID: contintents.SingleOrDefault(m => m.Name == row.ElementAt(1))?.ID, //Set the continent ID if it can be found
+                                                shortName: row.ElementAt(3),
+                                                longName: row.ElementAt(4),
+                                                fullDescription: row.ElementAt(5),
+                                                prayerNeed: float.Parse(row.ElementAt(6).Replace("%", "")),                     // parse percentage by removing %
+                                                prayerResource: float.Parse(row.ElementAt(7).Replace("%", "")));
+                switch (chunk.Type)                                                                                             // Depending on the type, add rows in the database
+                {
+                    case 0: //Part - An area of a country
+                        Part newPart = Data.CreatePart(ID: Guid.NewGuid(),
+                                                        chunk_ID: chunk.ID,
+                                                        prayerNeed: chunk.PrayerNeed,
+                                                        prayerResource: chunk.PrayerResource);
+
+                        String cntryName = chunk.ShortName.Split('-').First();                                                  // Country name is stored as "Country-Identifier"
+                        Country cntry = countryList.Where(m => cntryName == (m.Name!=""?m.Name:m.GivenName)).FirstOrDefault();  // Find a country with that name
+                        if(cntry != null)
+                        {
+                            newPart.Country_ID = cntry.ID;                                                                      // If there is a country with that name, add this part to it
+                        }
+                        else
+                        {                                                                                                       // If there is no country with that name, create one with it's own chunk
+                            Chunk cntryChunk = Data.CreateChunk(ID: "L" + (countryList.Count() + 1).ToString().PadLeft(3, '0'),
+                                                                type: 1,
+                                                                continent_ID: chunk.Continent_ID,
+                                                                shortName: cntryName,
+                                                                longName: cntryName,
+                                                                fullDescription: cntryName,
+                                                                prayerNeed: 0.0,
+                                                                prayerResource: 0.0);
+                            chunkList.Add(cntryChunk);
+
+                            cntry = Data.CreateCountry(ID: Guid.NewGuid(),
+                                                        givenName: cntryName,
+                                                        chunk_ID: cntryChunk.ID,
+                                                        prayerNeed: 0.0,
+                                                        prayerResource: 0.0);
+
+                            String cntryCode = conversions.Where(m => m.CountryName == cntryName).FirstOrDefault()?.Code;       //If that country name has an easily identified code, add it
+                            if (cntryCode != "" && cntryCode != null)
+                            {
+                                cntry.Code = cntryCode;
+                                cntry.Name = cntry.GivenName;
+                            }
+
+                            countryList.Add(cntry);
+                            newPart.Country_ID = cntry.ID;
+                        }
+                        partList.Add(newPart);
+                    break;
+
+                    case 1: //Cntry
+                        Country country = Data.CreateCountry(ID: Guid.NewGuid(),
+                                                            givenName: chunk.ShortName,
+                                                            chunk_ID: chunk.ID,
+                                                            prayerNeed: chunk.PrayerNeed,
+                                                            prayerResource: chunk.PrayerResource);
+
+                        String code = conversions.Where(m => m.CountryName == chunk.ShortName).FirstOrDefault()?.Code;          //If that country name has an easily identified code, add it
+                        if (code != "" && code != null)
+                        {
+                            country.Code = code;
+                            country.Name = country.GivenName;
+                        }
+                        countryList.Add(country);
+                    break;
+
+                    case 2: //Multi
+                        //Do nothing but cry.
+                    break;
+                }
+                chunkList.Add(chunk);
+            }
+            Data.SaveData(partList, countryList, chunkList);
+            Data.SetCreatedCountryPercents();                                       // If a country was created by parts, it still needs to have it's percentage calculated
+            return "success!";
+        }
+
+        [HttpPost]
+        public String GetCountries()
+        {
+            // Return all country rows
+            return JsonConvert.SerializeObject(Data.GetCountries(), Formatting.None,
             new JsonSerializerSettings
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             });
-        }
-
-        [HttpPost]
-        public String GetSelectedCountry(Guid ID)
-        {
-            return JsonConvert.SerializeObject(Data.GetCountry(ID));
         }
     }
 }

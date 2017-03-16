@@ -1,19 +1,21 @@
 //var toHighlight = [{id: ".us", value: 1000},{id: ".ar",value: 500},{id: ".ch",value: 10}]; //get json from server_daniel
-var toHighlight = $json.get(
+//var toHighlight = $json.get(
 
 $(document).ready(function() {
 	$("#highlight").click(function(event){
-		var ends = findEnds(toHighlight);
-		//alert(ends[0] + " " + ends[1]);
-		for (var i = 0; i< toHighlight.length; i++){
-			alert(getColor(toHighlight[i].value, ends));
-			$(toHighlight[i].id).css("fill",getColor(toHighlight[i].value, ends));
-		}
+	    showPrayerNeeded();
 	});
-	$(".map").load("Map.svg");
+	//$(".map").load("../Content/map.svg");
 })
 
-
+function highlight(toHighlight){
+	var ends = findEnds(toHighlight);
+	//alert(ends[0] + " " + ends[1]);
+	for (var i = 0; i< toHighlight.length; i++){
+		alert(getColor(toHighlight[i].value, ends));
+		$(toHighlight[i].id).css("fill", getColor(toHighlight[i].value, ends));
+	}
+}
 //http://stackoverflow.com/questions/10756313/javascript-jquery-map-a-range-of-numbers-to-another-range-of-numbers
 Number.prototype.map=function(in_min, in_max, out_min, out_max) {
   return (this - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;

@@ -30,12 +30,6 @@ namespace DOSMaps.Models
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertPart(Part instance);
-    partial void UpdatePart(Part instance);
-    partial void DeletePart(Part instance);
-    partial void InsertChunk(Chunk instance);
-    partial void UpdateChunk(Chunk instance);
-    partial void DeleteChunk(Chunk instance);
     partial void InsertContinent(Continent instance);
     partial void UpdateContinent(Continent instance);
     partial void DeleteContinent(Continent instance);
@@ -45,6 +39,15 @@ namespace DOSMaps.Models
     partial void InsertCountry(Country instance);
     partial void UpdateCountry(Country instance);
     partial void DeleteCountry(Country instance);
+    partial void InsertPart(Part instance);
+    partial void UpdatePart(Part instance);
+    partial void DeletePart(Part instance);
+    partial void InsertPrayersFor(PrayersFor instance);
+    partial void UpdatePrayersFor(PrayersFor instance);
+    partial void DeletePrayersFor(PrayersFor instance);
+    partial void InsertChunk(Chunk instance);
+    partial void UpdateChunk(Chunk instance);
+    partial void DeleteChunk(Chunk instance);
     #endregion
 		
 		public DOSMapsDataContext() : 
@@ -77,22 +80,6 @@ namespace DOSMaps.Models
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Part> Parts
-		{
-			get
-			{
-				return this.GetTable<Part>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Chunk> Chunks
-		{
-			get
-			{
-				return this.GetTable<Chunk>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Continent> Continents
 		{
 			get
@@ -116,572 +103,29 @@ namespace DOSMaps.Models
 				return this.GetTable<Country>();
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Part")]
-	public partial class Part : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private System.Guid _ID;
-		
-		private System.Nullable<System.Guid> _Country_ID;
-		
-		private string _Chunk_ID;
-		
-		private System.Nullable<double> _PrayerNeed;
-		
-		private string _PrayerResource;
-		
-		private EntityRef<Chunk> _Chunk;
-		
-		private EntityRef<Country> _Country;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(System.Guid value);
-    partial void OnIDChanged();
-    partial void OnCountry_IDChanging(System.Nullable<System.Guid> value);
-    partial void OnCountry_IDChanged();
-    partial void OnChunk_IDChanging(string value);
-    partial void OnChunk_IDChanged();
-    partial void OnPrayerNeedChanging(System.Nullable<double> value);
-    partial void OnPrayerNeedChanged();
-    partial void OnPrayerResourceChanging(string value);
-    partial void OnPrayerResourceChanged();
-    #endregion
-		
-		public Part()
-		{
-			this._Chunk = default(EntityRef<Chunk>);
-			this._Country = default(EntityRef<Country>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		public System.Guid ID
+		public System.Data.Linq.Table<Part> Parts
 		{
 			get
 			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
+				return this.GetTable<Part>();
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Country_ID", DbType="UniqueIdentifier")]
-		public System.Nullable<System.Guid> Country_ID
+		public System.Data.Linq.Table<PrayersFor> PrayersFors
 		{
 			get
 			{
-				return this._Country_ID;
-			}
-			set
-			{
-				if ((this._Country_ID != value))
-				{
-					if (this._Country.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnCountry_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Country_ID = value;
-					this.SendPropertyChanged("Country_ID");
-					this.OnCountry_IDChanged();
-				}
+				return this.GetTable<PrayersFor>();
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Chunk_ID", DbType="NChar(4) NOT NULL", CanBeNull=false)]
-		public string Chunk_ID
+		public System.Data.Linq.Table<Chunk> Chunks
 		{
 			get
 			{
-				return this._Chunk_ID;
+				return this.GetTable<Chunk>();
 			}
-			set
-			{
-				if ((this._Chunk_ID != value))
-				{
-					if (this._Chunk.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnChunk_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Chunk_ID = value;
-					this.SendPropertyChanged("Chunk_ID");
-					this.OnChunk_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrayerNeed", DbType="Float")]
-		public System.Nullable<double> PrayerNeed
-		{
-			get
-			{
-				return this._PrayerNeed;
-			}
-			set
-			{
-				if ((this._PrayerNeed != value))
-				{
-					this.OnPrayerNeedChanging(value);
-					this.SendPropertyChanging();
-					this._PrayerNeed = value;
-					this.SendPropertyChanged("PrayerNeed");
-					this.OnPrayerNeedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrayerResource", DbType="NChar(10)")]
-		public string PrayerResource
-		{
-			get
-			{
-				return this._PrayerResource;
-			}
-			set
-			{
-				if ((this._PrayerResource != value))
-				{
-					this.OnPrayerResourceChanging(value);
-					this.SendPropertyChanging();
-					this._PrayerResource = value;
-					this.SendPropertyChanged("PrayerResource");
-					this.OnPrayerResourceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Chunk_Part", Storage="_Chunk", ThisKey="Chunk_ID", OtherKey="ID", IsForeignKey=true)]
-		public Chunk Chunk
-		{
-			get
-			{
-				return this._Chunk.Entity;
-			}
-			set
-			{
-				Chunk previousValue = this._Chunk.Entity;
-				if (((previousValue != value) 
-							|| (this._Chunk.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Chunk.Entity = null;
-						previousValue.Parts.Remove(this);
-					}
-					this._Chunk.Entity = value;
-					if ((value != null))
-					{
-						value.Parts.Add(this);
-						this._Chunk_ID = value.ID;
-					}
-					else
-					{
-						this._Chunk_ID = default(string);
-					}
-					this.SendPropertyChanged("Chunk");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Country_Part", Storage="_Country", ThisKey="Country_ID", OtherKey="ID", IsForeignKey=true)]
-		public Country Country
-		{
-			get
-			{
-				return this._Country.Entity;
-			}
-			set
-			{
-				Country previousValue = this._Country.Entity;
-				if (((previousValue != value) 
-							|| (this._Country.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Country.Entity = null;
-						previousValue.Parts.Remove(this);
-					}
-					this._Country.Entity = value;
-					if ((value != null))
-					{
-						value.Parts.Add(this);
-						this._Country_ID = value.ID;
-					}
-					else
-					{
-						this._Country_ID = default(Nullable<System.Guid>);
-					}
-					this.SendPropertyChanged("Country");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Chunk")]
-	public partial class Chunk : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _ID;
-		
-		private System.Nullable<int> _Type;
-		
-		private string _ShortName;
-		
-		private string _LongName;
-		
-		private string _FullDescription;
-		
-		private System.Nullable<System.Guid> _Continent_ID;
-		
-		private System.Nullable<double> _PrayerNeed;
-		
-		private System.Nullable<double> _PrayerResource;
-		
-		private EntitySet<Part> _Parts;
-		
-		private EntitySet<Country> _Countries;
-		
-		private EntityRef<Continent> _Continent;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(string value);
-    partial void OnIDChanged();
-    partial void OnTypeChanging(System.Nullable<int> value);
-    partial void OnTypeChanged();
-    partial void OnShortNameChanging(string value);
-    partial void OnShortNameChanged();
-    partial void OnLongNameChanging(string value);
-    partial void OnLongNameChanged();
-    partial void OnFullDescriptionChanging(string value);
-    partial void OnFullDescriptionChanged();
-    partial void OnContinent_IDChanging(System.Nullable<System.Guid> value);
-    partial void OnContinent_IDChanged();
-    partial void OnPrayerNeedChanging(System.Nullable<double> value);
-    partial void OnPrayerNeedChanged();
-    partial void OnPrayerResourceChanging(System.Nullable<double> value);
-    partial void OnPrayerResourceChanged();
-    #endregion
-		
-		public Chunk()
-		{
-			this._Parts = new EntitySet<Part>(new Action<Part>(this.attach_Parts), new Action<Part>(this.detach_Parts));
-			this._Countries = new EntitySet<Country>(new Action<Country>(this.attach_Countries), new Action<Country>(this.detach_Countries));
-			this._Continent = default(EntityRef<Continent>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="NChar(4) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="Int")]
-		public System.Nullable<int> Type
-		{
-			get
-			{
-				return this._Type;
-			}
-			set
-			{
-				if ((this._Type != value))
-				{
-					this.OnTypeChanging(value);
-					this.SendPropertyChanging();
-					this._Type = value;
-					this.SendPropertyChanged("Type");
-					this.OnTypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShortName", DbType="NVarChar(12)")]
-		public string ShortName
-		{
-			get
-			{
-				return this._ShortName;
-			}
-			set
-			{
-				if ((this._ShortName != value))
-				{
-					this.OnShortNameChanging(value);
-					this.SendPropertyChanging();
-					this._ShortName = value;
-					this.SendPropertyChanged("ShortName");
-					this.OnShortNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LongName", DbType="NVarChar(40)")]
-		public string LongName
-		{
-			get
-			{
-				return this._LongName;
-			}
-			set
-			{
-				if ((this._LongName != value))
-				{
-					this.OnLongNameChanging(value);
-					this.SendPropertyChanging();
-					this._LongName = value;
-					this.SendPropertyChanged("LongName");
-					this.OnLongNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FullDescription", DbType="NVarChar(MAX)")]
-		public string FullDescription
-		{
-			get
-			{
-				return this._FullDescription;
-			}
-			set
-			{
-				if ((this._FullDescription != value))
-				{
-					this.OnFullDescriptionChanging(value);
-					this.SendPropertyChanging();
-					this._FullDescription = value;
-					this.SendPropertyChanged("FullDescription");
-					this.OnFullDescriptionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Continent_ID", DbType="UniqueIdentifier")]
-		public System.Nullable<System.Guid> Continent_ID
-		{
-			get
-			{
-				return this._Continent_ID;
-			}
-			set
-			{
-				if ((this._Continent_ID != value))
-				{
-					if (this._Continent.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnContinent_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Continent_ID = value;
-					this.SendPropertyChanged("Continent_ID");
-					this.OnContinent_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrayerNeed", DbType="Float")]
-		public System.Nullable<double> PrayerNeed
-		{
-			get
-			{
-				return this._PrayerNeed;
-			}
-			set
-			{
-				if ((this._PrayerNeed != value))
-				{
-					this.OnPrayerNeedChanging(value);
-					this.SendPropertyChanging();
-					this._PrayerNeed = value;
-					this.SendPropertyChanged("PrayerNeed");
-					this.OnPrayerNeedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrayerResource", DbType="Float")]
-		public System.Nullable<double> PrayerResource
-		{
-			get
-			{
-				return this._PrayerResource;
-			}
-			set
-			{
-				if ((this._PrayerResource != value))
-				{
-					this.OnPrayerResourceChanging(value);
-					this.SendPropertyChanging();
-					this._PrayerResource = value;
-					this.SendPropertyChanged("PrayerResource");
-					this.OnPrayerResourceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Chunk_Part", Storage="_Parts", ThisKey="ID", OtherKey="Chunk_ID")]
-		public EntitySet<Part> Parts
-		{
-			get
-			{
-				return this._Parts;
-			}
-			set
-			{
-				this._Parts.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Chunk_Country", Storage="_Countries", ThisKey="ID", OtherKey="Chunk_ID")]
-		public EntitySet<Country> Countries
-		{
-			get
-			{
-				return this._Countries;
-			}
-			set
-			{
-				this._Countries.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Continent_Chunk", Storage="_Continent", ThisKey="Continent_ID", OtherKey="ID", IsForeignKey=true)]
-		public Continent Continent
-		{
-			get
-			{
-				return this._Continent.Entity;
-			}
-			set
-			{
-				Continent previousValue = this._Continent.Entity;
-				if (((previousValue != value) 
-							|| (this._Continent.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Continent.Entity = null;
-						previousValue.Chunks.Remove(this);
-					}
-					this._Continent.Entity = value;
-					if ((value != null))
-					{
-						value.Chunks.Add(this);
-						this._Continent_ID = value.ID;
-					}
-					else
-					{
-						this._Continent_ID = default(Nullable<System.Guid>);
-					}
-					this.SendPropertyChanged("Continent");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Parts(Part entity)
-		{
-			this.SendPropertyChanging();
-			entity.Chunk = this;
-		}
-		
-		private void detach_Parts(Part entity)
-		{
-			this.SendPropertyChanging();
-			entity.Chunk = null;
-		}
-		
-		private void attach_Countries(Country entity)
-		{
-			this.SendPropertyChanging();
-			entity.Chunk = this;
-		}
-		
-		private void detach_Countries(Country entity)
-		{
-			this.SendPropertyChanging();
-			entity.Chunk = null;
 		}
 	}
 	
@@ -805,7 +249,7 @@ namespace DOSMaps.Models
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _Code;
+		private string _Code;
 		
 		private string _CountryName;
 		
@@ -813,7 +257,7 @@ namespace DOSMaps.Models
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnCodeChanging(int value);
+    partial void OnCodeChanging(string value);
     partial void OnCodeChanged();
     partial void OnCountryNameChanging(string value);
     partial void OnCountryNameChanged();
@@ -824,8 +268,8 @@ namespace DOSMaps.Models
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Code", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int Code
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Code", DbType="NChar(2) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Code
 		{
 			get
 			{
@@ -895,13 +339,15 @@ namespace DOSMaps.Models
 		
 		private string _Name;
 		
+		private string _GivenName;
+		
 		private string _Chunk_ID;
 		
 		private string _Code;
 		
-		private System.Nullable<double> _PrayerNeed;
+		private double _PrayerNeed;
 		
-		private System.Nullable<double> _PrayerResource;
+		private double _PrayerResource;
 		
 		private EntitySet<Part> _Parts;
 		
@@ -915,13 +361,15 @@ namespace DOSMaps.Models
     partial void OnIDChanged();
     partial void OnNameChanging(string value);
     partial void OnNameChanged();
+    partial void OnGivenNameChanging(string value);
+    partial void OnGivenNameChanged();
     partial void OnChunk_IDChanging(string value);
     partial void OnChunk_IDChanged();
     partial void OnCodeChanging(string value);
     partial void OnCodeChanged();
-    partial void OnPrayerNeedChanging(System.Nullable<double> value);
+    partial void OnPrayerNeedChanging(double value);
     partial void OnPrayerNeedChanged();
-    partial void OnPrayerResourceChanging(System.Nullable<double> value);
+    partial void OnPrayerResourceChanging(double value);
     partial void OnPrayerResourceChanged();
     #endregion
 		
@@ -972,7 +420,27 @@ namespace DOSMaps.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Chunk_ID", DbType="NChar(4)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GivenName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string GivenName
+		{
+			get
+			{
+				return this._GivenName;
+			}
+			set
+			{
+				if ((this._GivenName != value))
+				{
+					this.OnGivenNameChanging(value);
+					this.SendPropertyChanging();
+					this._GivenName = value;
+					this.SendPropertyChanged("GivenName");
+					this.OnGivenNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Chunk_ID", DbType="NChar(4) NOT NULL", CanBeNull=false)]
 		public string Chunk_ID
 		{
 			get
@@ -996,7 +464,7 @@ namespace DOSMaps.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Code", DbType="NChar(2)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Code", DbType="NChar(2) NOT NULL", CanBeNull=false)]
 		public string Code
 		{
 			get
@@ -1016,8 +484,8 @@ namespace DOSMaps.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrayerNeed", DbType="Float")]
-		public System.Nullable<double> PrayerNeed
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrayerNeed", DbType="Float NOT NULL")]
+		public double PrayerNeed
 		{
 			get
 			{
@@ -1036,8 +504,8 @@ namespace DOSMaps.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrayerResource", DbType="Float")]
-		public System.Nullable<double> PrayerResource
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrayerResource", DbType="Float NOT NULL")]
+		public double PrayerResource
 		{
 			get
 			{
@@ -1133,6 +601,821 @@ namespace DOSMaps.Models
 		{
 			this.SendPropertyChanging();
 			entity.Country = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Part")]
+	public partial class Part : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _ID;
+		
+		private System.Guid _Country_ID;
+		
+		private string _Chunk_ID;
+		
+		private double _PrayerNeed;
+		
+		private double _PrayerResource;
+		
+		private EntityRef<Country> _Country;
+		
+		private EntityRef<Chunk> _Chunk;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(System.Guid value);
+    partial void OnIDChanged();
+    partial void OnCountry_IDChanging(System.Guid value);
+    partial void OnCountry_IDChanged();
+    partial void OnChunk_IDChanging(string value);
+    partial void OnChunk_IDChanged();
+    partial void OnPrayerNeedChanging(double value);
+    partial void OnPrayerNeedChanged();
+    partial void OnPrayerResourceChanging(double value);
+    partial void OnPrayerResourceChanged();
+    #endregion
+		
+		public Part()
+		{
+			this._Country = default(EntityRef<Country>);
+			this._Chunk = default(EntityRef<Chunk>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Country_ID", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid Country_ID
+		{
+			get
+			{
+				return this._Country_ID;
+			}
+			set
+			{
+				if ((this._Country_ID != value))
+				{
+					if (this._Country.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCountry_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Country_ID = value;
+					this.SendPropertyChanged("Country_ID");
+					this.OnCountry_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Chunk_ID", DbType="NChar(4) NOT NULL", CanBeNull=false)]
+		public string Chunk_ID
+		{
+			get
+			{
+				return this._Chunk_ID;
+			}
+			set
+			{
+				if ((this._Chunk_ID != value))
+				{
+					if (this._Chunk.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnChunk_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Chunk_ID = value;
+					this.SendPropertyChanged("Chunk_ID");
+					this.OnChunk_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrayerNeed", DbType="Float NOT NULL")]
+		public double PrayerNeed
+		{
+			get
+			{
+				return this._PrayerNeed;
+			}
+			set
+			{
+				if ((this._PrayerNeed != value))
+				{
+					this.OnPrayerNeedChanging(value);
+					this.SendPropertyChanging();
+					this._PrayerNeed = value;
+					this.SendPropertyChanged("PrayerNeed");
+					this.OnPrayerNeedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrayerResource", DbType="Float NOT NULL")]
+		public double PrayerResource
+		{
+			get
+			{
+				return this._PrayerResource;
+			}
+			set
+			{
+				if ((this._PrayerResource != value))
+				{
+					this.OnPrayerResourceChanging(value);
+					this.SendPropertyChanging();
+					this._PrayerResource = value;
+					this.SendPropertyChanged("PrayerResource");
+					this.OnPrayerResourceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Country_Part", Storage="_Country", ThisKey="Country_ID", OtherKey="ID", IsForeignKey=true)]
+		public Country Country
+		{
+			get
+			{
+				return this._Country.Entity;
+			}
+			set
+			{
+				Country previousValue = this._Country.Entity;
+				if (((previousValue != value) 
+							|| (this._Country.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Country.Entity = null;
+						previousValue.Parts.Remove(this);
+					}
+					this._Country.Entity = value;
+					if ((value != null))
+					{
+						value.Parts.Add(this);
+						this._Country_ID = value.ID;
+					}
+					else
+					{
+						this._Country_ID = default(System.Guid);
+					}
+					this.SendPropertyChanged("Country");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Chunk_Part", Storage="_Chunk", ThisKey="Chunk_ID", OtherKey="ID", IsForeignKey=true)]
+		public Chunk Chunk
+		{
+			get
+			{
+				return this._Chunk.Entity;
+			}
+			set
+			{
+				Chunk previousValue = this._Chunk.Entity;
+				if (((previousValue != value) 
+							|| (this._Chunk.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Chunk.Entity = null;
+						previousValue.Parts.Remove(this);
+					}
+					this._Chunk.Entity = value;
+					if ((value != null))
+					{
+						value.Parts.Add(this);
+						this._Chunk_ID = value.ID;
+					}
+					else
+					{
+						this._Chunk_ID = default(string);
+					}
+					this.SendPropertyChanged("Chunk");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PrayersFor")]
+	public partial class PrayersFor : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _ID;
+		
+		private string _FromChunk_ID;
+		
+		private string _ToChunk_ID;
+		
+		private EntityRef<Chunk> _Chunk;
+		
+		private EntityRef<Chunk> _Chunk1;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(System.Guid value);
+    partial void OnIDChanged();
+    partial void OnFromChunk_IDChanging(string value);
+    partial void OnFromChunk_IDChanged();
+    partial void OnToChunk_IDChanging(string value);
+    partial void OnToChunk_IDChanged();
+    #endregion
+		
+		public PrayersFor()
+		{
+			this._Chunk = default(EntityRef<Chunk>);
+			this._Chunk1 = default(EntityRef<Chunk>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FromChunk_ID", DbType="NChar(4) NOT NULL", CanBeNull=false)]
+		public string FromChunk_ID
+		{
+			get
+			{
+				return this._FromChunk_ID;
+			}
+			set
+			{
+				if ((this._FromChunk_ID != value))
+				{
+					if (this._Chunk.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFromChunk_IDChanging(value);
+					this.SendPropertyChanging();
+					this._FromChunk_ID = value;
+					this.SendPropertyChanged("FromChunk_ID");
+					this.OnFromChunk_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ToChunk_ID", DbType="NChar(4) NOT NULL", CanBeNull=false)]
+		public string ToChunk_ID
+		{
+			get
+			{
+				return this._ToChunk_ID;
+			}
+			set
+			{
+				if ((this._ToChunk_ID != value))
+				{
+					if (this._Chunk1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnToChunk_IDChanging(value);
+					this.SendPropertyChanging();
+					this._ToChunk_ID = value;
+					this.SendPropertyChanged("ToChunk_ID");
+					this.OnToChunk_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Chunk_PrayersFor", Storage="_Chunk", ThisKey="FromChunk_ID", OtherKey="ID", IsForeignKey=true)]
+		public Chunk Chunk
+		{
+			get
+			{
+				return this._Chunk.Entity;
+			}
+			set
+			{
+				Chunk previousValue = this._Chunk.Entity;
+				if (((previousValue != value) 
+							|| (this._Chunk.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Chunk.Entity = null;
+						previousValue.PrayersFors.Remove(this);
+					}
+					this._Chunk.Entity = value;
+					if ((value != null))
+					{
+						value.PrayersFors.Add(this);
+						this._FromChunk_ID = value.ID;
+					}
+					else
+					{
+						this._FromChunk_ID = default(string);
+					}
+					this.SendPropertyChanged("Chunk");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Chunk_PrayersFor1", Storage="_Chunk1", ThisKey="ToChunk_ID", OtherKey="ID", IsForeignKey=true)]
+		public Chunk Chunk1
+		{
+			get
+			{
+				return this._Chunk1.Entity;
+			}
+			set
+			{
+				Chunk previousValue = this._Chunk1.Entity;
+				if (((previousValue != value) 
+							|| (this._Chunk1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Chunk1.Entity = null;
+						previousValue.PrayersFors1.Remove(this);
+					}
+					this._Chunk1.Entity = value;
+					if ((value != null))
+					{
+						value.PrayersFors1.Add(this);
+						this._ToChunk_ID = value.ID;
+					}
+					else
+					{
+						this._ToChunk_ID = default(string);
+					}
+					this.SendPropertyChanged("Chunk1");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Chunk")]
+	public partial class Chunk : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _ID;
+		
+		private int _Type;
+		
+		private string _ShortName;
+		
+		private string _LongName;
+		
+		private string _FullDescription;
+		
+		private System.Nullable<System.Guid> _Continent_ID;
+		
+		private double _PrayerNeed;
+		
+		private double _PrayerResource;
+		
+		private EntitySet<Country> _Countries;
+		
+		private EntitySet<Part> _Parts;
+		
+		private EntitySet<PrayersFor> _PrayersFors;
+		
+		private EntitySet<PrayersFor> _PrayersFors1;
+		
+		private EntityRef<Continent> _Continent;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(string value);
+    partial void OnIDChanged();
+    partial void OnTypeChanging(int value);
+    partial void OnTypeChanged();
+    partial void OnShortNameChanging(string value);
+    partial void OnShortNameChanged();
+    partial void OnLongNameChanging(string value);
+    partial void OnLongNameChanged();
+    partial void OnFullDescriptionChanging(string value);
+    partial void OnFullDescriptionChanged();
+    partial void OnContinent_IDChanging(System.Nullable<System.Guid> value);
+    partial void OnContinent_IDChanged();
+    partial void OnPrayerNeedChanging(double value);
+    partial void OnPrayerNeedChanged();
+    partial void OnPrayerResourceChanging(double value);
+    partial void OnPrayerResourceChanged();
+    #endregion
+		
+		public Chunk()
+		{
+			this._Countries = new EntitySet<Country>(new Action<Country>(this.attach_Countries), new Action<Country>(this.detach_Countries));
+			this._Parts = new EntitySet<Part>(new Action<Part>(this.attach_Parts), new Action<Part>(this.detach_Parts));
+			this._PrayersFors = new EntitySet<PrayersFor>(new Action<PrayersFor>(this.attach_PrayersFors), new Action<PrayersFor>(this.detach_PrayersFors));
+			this._PrayersFors1 = new EntitySet<PrayersFor>(new Action<PrayersFor>(this.attach_PrayersFors1), new Action<PrayersFor>(this.detach_PrayersFors1));
+			this._Continent = default(EntityRef<Continent>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="NChar(4) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="Int NOT NULL")]
+		public int Type
+		{
+			get
+			{
+				return this._Type;
+			}
+			set
+			{
+				if ((this._Type != value))
+				{
+					this.OnTypeChanging(value);
+					this.SendPropertyChanging();
+					this._Type = value;
+					this.SendPropertyChanged("Type");
+					this.OnTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShortName", DbType="NVarChar(12) NOT NULL", CanBeNull=false)]
+		public string ShortName
+		{
+			get
+			{
+				return this._ShortName;
+			}
+			set
+			{
+				if ((this._ShortName != value))
+				{
+					this.OnShortNameChanging(value);
+					this.SendPropertyChanging();
+					this._ShortName = value;
+					this.SendPropertyChanged("ShortName");
+					this.OnShortNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LongName", DbType="NVarChar(40) NOT NULL", CanBeNull=false)]
+		public string LongName
+		{
+			get
+			{
+				return this._LongName;
+			}
+			set
+			{
+				if ((this._LongName != value))
+				{
+					this.OnLongNameChanging(value);
+					this.SendPropertyChanging();
+					this._LongName = value;
+					this.SendPropertyChanged("LongName");
+					this.OnLongNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FullDescription", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string FullDescription
+		{
+			get
+			{
+				return this._FullDescription;
+			}
+			set
+			{
+				if ((this._FullDescription != value))
+				{
+					this.OnFullDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._FullDescription = value;
+					this.SendPropertyChanged("FullDescription");
+					this.OnFullDescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Continent_ID", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> Continent_ID
+		{
+			get
+			{
+				return this._Continent_ID;
+			}
+			set
+			{
+				if ((this._Continent_ID != value))
+				{
+					if (this._Continent.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnContinent_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Continent_ID = value;
+					this.SendPropertyChanged("Continent_ID");
+					this.OnContinent_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrayerNeed", DbType="Float NOT NULL")]
+		public double PrayerNeed
+		{
+			get
+			{
+				return this._PrayerNeed;
+			}
+			set
+			{
+				if ((this._PrayerNeed != value))
+				{
+					this.OnPrayerNeedChanging(value);
+					this.SendPropertyChanging();
+					this._PrayerNeed = value;
+					this.SendPropertyChanged("PrayerNeed");
+					this.OnPrayerNeedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrayerResource", DbType="Float NOT NULL")]
+		public double PrayerResource
+		{
+			get
+			{
+				return this._PrayerResource;
+			}
+			set
+			{
+				if ((this._PrayerResource != value))
+				{
+					this.OnPrayerResourceChanging(value);
+					this.SendPropertyChanging();
+					this._PrayerResource = value;
+					this.SendPropertyChanged("PrayerResource");
+					this.OnPrayerResourceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Chunk_Country", Storage="_Countries", ThisKey="ID", OtherKey="Chunk_ID")]
+		public EntitySet<Country> Countries
+		{
+			get
+			{
+				return this._Countries;
+			}
+			set
+			{
+				this._Countries.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Chunk_Part", Storage="_Parts", ThisKey="ID", OtherKey="Chunk_ID")]
+		public EntitySet<Part> Parts
+		{
+			get
+			{
+				return this._Parts;
+			}
+			set
+			{
+				this._Parts.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Chunk_PrayersFor", Storage="_PrayersFors", ThisKey="ID", OtherKey="FromChunk_ID")]
+		public EntitySet<PrayersFor> PrayersFors
+		{
+			get
+			{
+				return this._PrayersFors;
+			}
+			set
+			{
+				this._PrayersFors.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Chunk_PrayersFor1", Storage="_PrayersFors1", ThisKey="ID", OtherKey="ToChunk_ID")]
+		public EntitySet<PrayersFor> PrayersFors1
+		{
+			get
+			{
+				return this._PrayersFors1;
+			}
+			set
+			{
+				this._PrayersFors1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Continent_Chunk", Storage="_Continent", ThisKey="Continent_ID", OtherKey="ID", IsForeignKey=true)]
+		public Continent Continent
+		{
+			get
+			{
+				return this._Continent.Entity;
+			}
+			set
+			{
+				Continent previousValue = this._Continent.Entity;
+				if (((previousValue != value) 
+							|| (this._Continent.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Continent.Entity = null;
+						previousValue.Chunks.Remove(this);
+					}
+					this._Continent.Entity = value;
+					if ((value != null))
+					{
+						value.Chunks.Add(this);
+						this._Continent_ID = value.ID;
+					}
+					else
+					{
+						this._Continent_ID = default(Nullable<System.Guid>);
+					}
+					this.SendPropertyChanged("Continent");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Countries(Country entity)
+		{
+			this.SendPropertyChanging();
+			entity.Chunk = this;
+		}
+		
+		private void detach_Countries(Country entity)
+		{
+			this.SendPropertyChanging();
+			entity.Chunk = null;
+		}
+		
+		private void attach_Parts(Part entity)
+		{
+			this.SendPropertyChanging();
+			entity.Chunk = this;
+		}
+		
+		private void detach_Parts(Part entity)
+		{
+			this.SendPropertyChanging();
+			entity.Chunk = null;
+		}
+		
+		private void attach_PrayersFors(PrayersFor entity)
+		{
+			this.SendPropertyChanging();
+			entity.Chunk = this;
+		}
+		
+		private void detach_PrayersFors(PrayersFor entity)
+		{
+			this.SendPropertyChanging();
+			entity.Chunk = null;
+		}
+		
+		private void attach_PrayersFors1(PrayersFor entity)
+		{
+			this.SendPropertyChanging();
+			entity.Chunk1 = this;
+		}
+		
+		private void detach_PrayersFors1(PrayersFor entity)
+		{
+			this.SendPropertyChanging();
+			entity.Chunk1 = null;
 		}
 	}
 }
