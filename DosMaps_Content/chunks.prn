@@ -1,0 +1,180 @@
+  UID (PK)     Continent  Chunk Type (Cntry, Multi orChunk Short N      Chunk Long Name (40 char)           Chunk Full Description      Total Prayer Need (PopulTotal Prayer
+    S001         Asia     Part                       China-C      China - Central                      China - Central                                3.3612871%   2.7299961%
+    S002         Asia     Part                       China-E      China - East                         China - East                                   3.1994018%   3.3307111%
+    S003         Asia     Part                       China-NC     China - North Central                China - North Central                          2.4266173%   1.4412854%
+    S004         Asia     Part                       China-NE     China - North East                   China - North East                             1.4977387%   1.2874736%
+    S005         Asia     Part                       China-NW     China - North West                   China - North West                             0.5111702%   0.2116005%
+    S006         Asia     Part                       China-OAR    China - Outer Autonomous Regions     China - Outer Autonomous Regions               0.6772295%   0.2823577%
+    S007         Asia     Part                       China-SaSE   China - South and Southwest          China - South and Southwest                    4.4744926%   1.8055278%
+    S008         Asia     Part                       China-SE     China - South East                   China - South East                             2.1731230%   2.9109565%
+    S009         Asia     Part                       India-E      India - East                         India - East                                   2.4521786%   0.3169554%
+    S010         Asia     Part                       India-N      India - North                        India - North                                  7.5122127%   0.2518025%
+    S011         Asia     Part                       India-NE     India - North East                   India - North East                             0.6320386%   1.4450835%
+    S012         Asia     Part                       India-S      India - South                        India - South                                  4.1233704%   2.4499823%
+    S013         Asia     Part                       India-W      India - Western                      India - Western                                2.6871120%   0.6595280%
+    S014     North AmericaPart                       US-CA        USA - Central Atlantic               USA - Central Atlantic                         0.4549051%   1.8236238%
+    S015     North AmericaPart                       US-ENC       USA - East North Central             USA - East North Central                       0.6490771%   2.1986201%
+    S016     North AmericaPart                       US-ESC       USA - East South Central             USA - East South Central                       0.2618769%   1.7241338%
+    S017     North AmericaPart                       US-M         USA - Mountain                       USA - Mountain                                 0.3264391%   0.9842160%
+    S018     North AmericaPart                       US-NE        USA - Northeast                      USA - Northeast                                0.7808275%   1.3538754%
+    S019     North AmericaPart                       US-P         USA - Pacific                        USA - Pacific                                  0.7285303%   2.1177291%
+    S020     North AmericaPart                       US-SA        USA - South Atlantic                 USA - South Atlantic                           0.4229347%   1.6377315%
+    S021     North AmericaPart                       US-WNC       USA - West North Central             USA - West North Central                       0.2930036%   1.0982744%
+    S022     North AmericaPart                       US-WSC       USA - West South Central             USA - West South Central                       0.5414554%   2.4312629%
+    S023         Asia     Cntry                      Indonesia    Indonesia                            Indonesia                                      3.3032447%   2.4040812%
+    S024         Asia     Cntry                      Pakistan     Pakistan                             Pakistan                                       2.7591085%   0.2159295%
+    S025     Latin AmericaPart                       Brazil-N     Brazil - North                       Brazil - North                                 0.2287999%   0.9615649%
+    S026     Latin AmericaPart                       Brazil-NE    Brazil - Northeast                   Brazil - Northeast                             0.7655572%   1.8495672%
+    S027     Latin AmericaPart                       Brazil-CW    Brazil - Central West                Brazil - Central West                          0.2027483%   0.8017714%
+    S028     Latin AmericaPart                       Brazil-SE    Brazil - Southeast                   Brazil - Southeast                             0.5639390%   2.0874884%
+    S029     Latin AmericaPart                       Brazil-SP    Brazil - Sau Paulo                   Brazil - Sau Paulo                             0.5950907%   2.1127589%
+    S030     Latin AmericaPart                       Brazil-S     Brazil - South                       Brazil - South                                 0.3949786%   1.1754443%
+    S031        Africa    Part                       Nigeria-NC   Nigeria - North Central              Nigeria - North Central                        0.3450576%   1.5118423%
+    S032        Africa    Part                       Nigeria-NE   Nigeria - North East                 Nigeria - North East                           0.3230207%   0.5755041%
+    S033        Africa    Part                       Nigeria-NW   Nigeria - North West                 Nigeria - North West                           0.6093161%   0.3790511%
+    S034        Africa    Part                       Nigeria-SE   Nigeria - South East                 Nigeria - South East                           0.2789188%   1.9964328%
+    S035        Africa    Part                       Nigeria-SS   Nigeria - South South                Nigeria - South South                          0.3577999%   2.5466214%
+    S036        Africa    Part                       Nigeria-SW   Nigeria - South West                 Nigeria - South West                           0.4696168%   2.2750651%
+    S037         Asia     Cntry                      Bangladesh   Bangladesh                           Bangladesh                                     2.3673732%   0.1216758%
+    S038        Europe    Cntry                      Russia       Russia                               Russia                                         1.8487649%   0.2951270%
+    S039         Asia     Cntry                      Japan        Japan                                Japan                                          1.7006678%   0.0940994%
+    S040     Latin AmericaCntry                      Mexico       Mexico                               Mexico                                         1.5629572%   1.7777235%
+    S041         Asia     Cntry                      Philippines  Philippines                          Philippines                                    1.3797303%   2.1670560%
+    S042        Africa    Cntry                      Ethopia      Ethiopia                             Ethiopia                                       1.3023737%   3.3090957%
+    S043         Asia     Cntry                      Vietnam      Vietnam                              Vietnam                                        1.2698166%   0.2885487%
+    S044        Africa    Cntry                      Egypt        Egypt                                Egypt                                          1.2461239%   0.6615515%
+    S045        Europe    Cntry                      Germany      Germany                              Germany                                        1.1019055%   0.2930257%
+    S046         Asia     Cntry                      Turkey       Turkey                               Turkey                                         1.0862664%   0.0012415%
+    S047         Asia     Cntry                      Iran         Iran                                 Iran                                           1.0747255%   0.0463482%
+    S048        Africa    Cntry                      Congo-DRC    Congo-DRC                            Congo-DRC                                      1.0509342%   2.4490226%
+    S049         Asia     Cntry                      Thailand     Thailand                             Thailand                                       0.9514305%   0.0590269%
+    C008        Europe    Multi                      France+M     France & Monaco                      France & Monaco                                0.8752711%   0.1093742%
+    S051        Europe    Cntry                      UK           United Kingdom                       United Kingdom                                 0.8634006%   0.8836165%
+    C012        Europe    Multi                      Italy+M+SM+V Italy, Malta, San Marino & Vatican   Italy, Malta, San Marino & Vatica              0.8541671%   0.1128326%
+    S053        Africa    Cntry                      South Africa South Africa                         South Africa                                   0.7193641%   1.9110221%
+    S054         Asia     Cntry                      Myanmar      Myanmar                              Myanmar                                        0.7152097%   0.4583693%
+    S055        Africa    Cntry                      Tanzania     Tanzania                             Tanzania                                       0.7055905%   1.4574193%
+    S056     Latin AmericaCntry                      Colombia     Colombia                             Colombia                                       0.6761185%   0.7454061%
+    S057         Asia     Cntry                      KoreaSouth   Korea, South                         Korea, South                                   0.6714302%   1.3607661%
+    C018        Europe    Multi                      Spain+A+G    Spain, Andorra & Gibraltar           Spain, Andorra & Gibraltar                     0.6616675%   0.0881114%
+    S059        Africa    Cntry                      Kenya        Kenya                                Kenya                                          0.6335283%   3.8030719%
+    S060        Europe    Cntry                      Ukraine      Ukraine                              Ukraine                                        0.5982304%   0.3257134%
+    S061     Latin AmericaCntry                      Argentina    Argentina                            Argentina                                      0.5811489%   0.6625987%
+    S062        Africa    Cntry                      Uganda       Uganda                               Uganda                                         0.5423063%   2.4139842%
+    S063        Africa    Cntry                      Algeria      Algeria                              Algeria                                        0.5209981%   0.0199760%
+    S064        Africa    Cntry                      Sudan        Sudan                                Sudan                                          0.5201023%   0.3057981%
+    S065        Europe    Cntry                      Poland       Poland                               Poland                                         0.5168321%   0.0165437%
+    S066     North AmericaCntry                      Canada       Canada                               Canada                                         0.4855702%   0.4357509%
+    S067         Asia     Cntry                      Iraq         Iraq                                 Iraq                                           0.4791328%   0.0101528%
+    S068        Africa    Cntry                      Morocco      Morocco                              Morocco                                        0.4766151%   0.0009621%
+    S069         Asia     Cntry                      Afghanistan  Afghanistan                          Afghanistan                                    0.4728826%   0.0029410%
+    C014         Asia     Multi                      Nepal+B      Nepal & Bhutan                       Nepal & Bhutan                                 0.4654948%   0.1797106%
+    S071     Latin AmericaCntry                      Venezuela    Venezuela                            Venezuela                                      0.4323251%   0.5929725%
+    S072     Latin AmericaCntry                      Peru         Peru                                 Peru                                           0.4282577%   0.6776077%
+    S073         Asia     Cntry                      Malaysia     Malaysia                             Malaysia                                       0.4167017%   0.2242950%
+    S074         Asia     Cntry                      Uzbekistan   Uzbekistan                           Uzbekistan                                     0.4027669%   0.0169583%
+    S075         Asia     Cntry                      Saudi Arabia Saudi Arabia                         Saudi Arabia                                   0.4003600%   0.0176050%
+    S076         Asia     Cntry                      Yemen        Yemen                                Yemen                                          0.3843837%   0.0008823%
+    S077        Africa    Cntry                      Ghana        Ghana                                Ghana                                          0.3713697%   1.1791625%
+    S078         Asia     Cntry                      Syria        Syria                                Syria                                          0.3643309%   0.0046784%
+    S079        Africa    Cntry                      Mozambique   Mozambique                           Mozambique                                     0.3617026%   0.5456874%
+    S080         Asia     Cntry                      KoreaNorth   Korea, North                         Korea, North                                   0.3372611%   0.0530703%
+    S081         Asia     Cntry                      ROCTaiwan    Republic of China, Taiwan            Republic of China, Taiwan                      0.3344596%   0.1163723%
+    S082        Africa    Cntry                      CdIvoire     Côte d’Ivoire                        Côte d’Ivoire                                  0.3334829%   0.4210071%
+    S083        Africa    Cntry                      Madagascar   Madagascar                           Madagascar                                     0.3182135%   0.4416684%
+    S084        Pacific   Cntry                      Australia    Australia                            Australia                                      0.3134384%   0.5281668%
+    S085        Africa    Cntry                      Cameroon     Cameroon                             Cameroon                                       0.3089891%   0.3583970%
+    S086        Africa    Cntry                      Angola       Angola                               Angola                                         0.3004026%   0.8537632%
+    S087         Asia     Cntry                      SriLanka     Sri Lanka                            Sri Lanka                                      0.2952378%   0.0438130%
+    S088        Europe    Cntry                      Romania      Romania                              Romania                                        0.2876745%   0.2073118%
+    S089        Africa    Cntry                      BurkinaFaso  Burkina Faso                         Burkina Faso                                   0.2680799%   0.2836815%
+    S090        Africa    Cntry                      Niger        Niger                                Niger                                          0.2678373%   0.0041576%
+    S091        Africa    Cntry                      Malawi       Malawi                               Malawi                                         0.2511374%   0.5698878%
+    S092     Latin AmericaCntry                      Chile        Chile                                Chile                                          0.2509361%   0.6035962%
+    S093        Europe    Cntry                      Netherlands  Netherlands                          Netherlands                                    0.2372598%   0.1188829%
+    S094         Asia     Cntry                      Cambodia     Cambodia                             Cambodia                                       0.2285050%   0.0589374%
+    S095         Asia     Cntry                      Kazakhstan   Kazakhstan                           Kazakhstan                                     0.2284007%   0.0199776%
+    S096     Latin AmericaCntry                      Guatemala    Guatemala                            Guatemala                                      0.2274512%   0.6621163%
+    S097        Africa    Cntry                      Mali         Mali                                 Mali                                           0.2104732%   0.0170497%
+    S098        Africa    Cntry                      Zambia       Zambia                               Zambia                                         0.2100660%   0.6417445%
+    S099        Africa    Cntry                      Senegal      Senegal                              Senegal                                        0.2059667%   0.0055815%
+    S100     Latin AmericaCntry                      Ecuador      Ecuador                              Ecuador                                        0.2041304%   0.2392090%
+    S101        Africa    Cntry                      Chad         Chad                                 Chad                                           0.1865232%   0.2187992%
+    S102        Africa    Cntry                      SouthSudan   South Sudan                          South Sudan                                    0.1840323%   0.6437855%
+    S103        Africa    Cntry                      Zimbabwe     Zimbabwe                             Zimbabwe                                       0.1811445%   0.7017502%
+    S104        Africa    Cntry                      Rwanda       Rwanda                               Rwanda                                         0.1667919%   0.5151761%
+    S105        Africa    Cntry                      Guinea       Guinea                               Guinea                                         0.1642908%   0.0129217%
+    C010        Europe    Multi                      Greece+C     Greece & Cyprus                      Greece & Cyprus                                0.1806342%   0.0084439%
+    S107       Caribbean  Cntry                      Cuba         Cuba                                 Cuba                                           0.1596446%   0.1874364%
+    S108       Caribbean  Cntry                      Haiti        Haiti                                Haiti                                          0.1571463%   0.2930713%
+    C002        Europe    Multi                      Belgium+L    Belgium & Luxembourg                 Belgium & Luxembourg                           0.1704638%   0.0246551%
+    S110       Caribbean  Cntry                      DominicanRep Dominican Republic                   Dominican Republic                             0.1563028%   0.1720702%
+    S111     Latin AmericaCntry                      Bolivia      Bolivia                              Bolivia                                        0.1561540%   0.3281655%
+    S112        Europe    Cntry                      Portugal     Portugal                             Portugal                                       0.1556910%   0.0542061%
+    S113        Africa    Cntry                      Tunisia      Tunisia                              Tunisia                                        0.1552991%   0.0002337%
+    S114        Africa    Cntry                      Benin        Benin                                Benin                                          0.1538290%   0.1524719%
+    S115        Europe    Cntry                      Czechia      Czechia                              Czechia                                        0.1517882%   0.0119025%
+    S116        Africa    Cntry                      Somalia      Somalia                              Somalia                                        0.1498279%   0.0010128%
+    S117        Europe    Cntry                      Hungary      Hungary                              Hungary                                        0.1415322%   0.0474969%
+    S118        Africa    Cntry                      Burundi      Burundi                              Burundi                                        0.1411088%   0.4467195%
+    S119        Europe    Cntry                      Sweden       Sweden                               Sweden                                         0.1368767%   0.1003034%
+    S120         Asia     Cntry                      Azerbaijan   Azerbaijan                           Azerbaijan                                     0.1357721%   0.0035740%
+    S121        Europe    Cntry                      Belarus      Belarus                              Belarus                                        0.1347469%   0.0228703%
+    S122        Europe    Cntry                      Austria      Austria                              Austria                                        0.1236909%   0.0072365%
+    S123     Latin AmericaCntry                      Honduras     Honduras                             Honduras                                       0.1219194%   0.3496925%
+    S124         Asia     Cntry                      Israel       Israel                               Israel                                         0.1154121%   0.0065613%
+    S125        Pacific   Cntry                      PaNewGuinea  Papua New Guinea                     Papua New Guinea                               0.1130666%   0.3324822%
+    C020        Europe    Multi                      Switzerlnd+L Switzerland & Liechtenstein          Switzerland & Liechtenstein                    0.1184908%   0.0574804%
+    S127        Europe    Cntry                      Serbia       Serbia                               Serbia                                         0.1121345%   0.0080204%
+    S128        Africa    Cntry                      Togo         Togo                                 Togo                                           0.1119249%   0.1463942%
+    S129         Asia     Cntry                      Tajikistan   Tajikistan                           Tajikistan                                     0.1117665%   0.0015620%
+    S130         Asia     Cntry                      Jordan       Jordan                               Jordan                                         0.1099579%   0.0036189%
+    S131        Europe    Cntry                      Bulgaria     Bulgaria                             Bulgaria                                       0.1064351%   0.0242549%
+    C011         Asia     Multi                      HongKong+M   HongKong+M                           Hong Kong & Macau                              0.1216640%   0.0764991%
+    S133        Africa    Cntry                      Libya        Libya                                Libya                                          0.1060290%   0.0040774%
+    S134     Latin AmericaCntry                      Paraguay     Paraguay                             Paraguay                                       0.1037601%   0.0737323%
+    S135         Asia     Cntry                      Laos         Laos                                 Laos                                           0.1034578%   0.0380657%
+    S136        Africa    Cntry                      SierraLeone  Sierra Leone                         Sierra Leone                                   0.0983762%   0.0449135%
+    S137     Latin AmericaCntry                      ElSalvador   El Salvador                          El Salvador                                    0.0938417%   0.3931954%
+    S138     Latin AmericaCntry                      Nicaragua    Nicaragua                            Nicaragua                                      0.0922485%   0.3643916%
+    C006        Africa    Multi                      Eritrea+D    Eritrea & Djibouti                   Eritrea & Djibouti                             0.1109707%   0.0226801%
+    S140         Asia     Cntry                      Kyrgyzstan   Kyrgyzstan                           Kyrgyzstan                                     0.0880066%   0.0079765%
+    S141        Europe    Cntry                      Denmark      Denmark                              Denmark                                        0.0832331%   0.0314304%
+    S142         Asia     Cntry                      Turkmenistan Turkmenistan                         Turkmenistan                                   0.0830351%   0.0003068%
+    S143         Asia     Cntry                      Singapore    Singapore                            Singapore                                      0.0823609%   0.0711016%
+    C007        Europe    Multi                      Finland+E    Finland & Estonia                    Finland & Estonia                              0.1074165%   0.1147276%
+    S145        Europe    Cntry                      Slovakia     Slovakia                             Slovakia                                       0.0817623%   0.0118764%
+    S146         Asia     Cntry                      UAE          United Arab Emirates                 United Arab Emirates                           0.0815093%   0.0127838%
+    S147         Asia     Cntry                      Palestine    Palestine                            Palestine                                      0.0781080%   0.0006625%
+    S148        Europe    Cntry                      Norway       Norway                               Norway                                         0.0769736%   0.0693085%
+    S149        Africa    Cntry                      Liberia      Liberia                              Liberia                                        0.0764385%   0.1210254%
+    S150        Europe    Cntry                      Ireland      Ireland                              Ireland                                        0.0762166%   0.0134564%
+    S151     Latin AmericaCntry                      CostaRica    Costa Rica                           Costa Rica                                     0.0754620%   0.1329382%
+    S152        Africa    Cntry                      CentAfrRepub Central African Republic             Central African Republic                       0.0751468%   0.2620767%
+    S153        Pacific   Cntry                      NewZealand   New Zealand                          New Zealand                                    0.0691010%   0.1293706%
+    S154         Asia     Cntry                      Lebanon      Lebanon                              Lebanon                                        0.0681368%   0.0038231%
+    C004        Europe    Multi                      Balkans-NE   Croatia & Slovenia                   Croatia & Slovenia                             0.1028738%   0.0035007%
+    C003        Africa    Multi                      Congo+3      Congo & Neighbours                   Congo & Neighbours                             0.1202449%   0.1515045%
+    S157       Caribbean  Cntry                      PuertoRico   Puerto Rico                          Puerto Rico                                    0.0633871%   0.1807962%
+    S158         Asia     Cntry                      Georgia      Georgia                              Georgia                                        0.0620733%   0.0101900%
+    S159     Latin AmericaCntry                      Panama       Panama                               Panama                                         0.0596411%   0.1356992%
+    S160        Africa    Cntry                      Mauritania   Mauritania                           Mauritania                                     0.0594430%   0.0004632%
+    S161        Europe    Cntry                      Bosnia       Bosnia                               Bosnia                                         0.0586806%   0.0003942%
+    S162         Asia     Cntry                      Kuwait       Kuwait                               Kuwait                                         0.0546932%   0.0106197%
+    S163     Latin AmericaCntry                      Uruguay      Uruguay                              Uruguay                                        0.0543262%   0.0396142%
+    S164        Europe    Cntry                      Moldova      Moldova                              Moldova                                        0.0540619%   0.0249575%
+    C001        Europe    Multi                      Balkans-SE   Albania, Kosovo, Macedonia & MontenegAlbania, Kosovo, Macedonia & Mont              0.1399082%   0.0037792%
+    S166         Asia     Cntry                      Oman         Oman                                 Oman                                           0.0516429%   0.0051419%
+    S167         Asia     Cntry                      Armenia      Armenia                              Armenia                                        0.0501869%   0.0462708%
+    C013        Europe    Multi                      Latvia+Lith  Lithuania & Latvia                   Lithuania & Latvia                             0.0874356%   0.0334817%
+    S169         Asia     Cntry                      Mongolia     Mongolia                             Mongolia                                       0.0466922%   0.0078846%
+    S170       Caribbean  Cntry                      Jamaica      Jamaica                              Jamaica                                        0.0457576%   0.1319413%
+    C015         Asia     Multi                      Qatar+B      Qatar & Bahrain                      Qatar & Bahrain                                0.0620127%   0.0072188%
+    S172        Africa    Cntry                      Namibia      Namibia                              Namibia                                        0.0408380%   0.0485091%
+    C019        Africa    Multi                      Leso+Bot+Swz Swaziland, Lesotho & Botswana        Swaziland, Lesotho & Botswana                  0.0987265%   0.1228713%
+    C009        Africa    Multi                      Gambia+GuBis The Gambia & Guinea-Bissau           The Gambia & Guinea-Bissau                     0.0676045%   0.0091871%
+    C021         Asia     Multi                      IndOcean11   Indian Ocean, Timor Leste & Brunei   Indian Ocean, Timor Leste & Brune              0.1319758%   0.0451123%
+    C016       Caribbean  Multi                      Caribbean25  Smaller Caribbean Countries          Smaller Caribbean Countries                    0.2260567%   0.1895366%
+    C017        Pacific   Multi                      Pacific22    Smaller Pacific States               Smaller Pacific States                         0.1647125%   0.1297411%
+    C005        Africa    Multi                      Atlantic8    Altantic Islands                     Altantic Islands                               0.0554194%   0.0150419%
+END          END          END                        END          END                                  END                              END                     END
