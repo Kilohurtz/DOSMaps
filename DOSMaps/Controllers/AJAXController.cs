@@ -9,17 +9,16 @@ namespace DOSMaps.Controllers
 {
     public class AJAXController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index() // This page lets the admin set the data into the database and correct rows
         {
-            
             List<Chunk> multis = Data.GetMultis().Where(m => m.MultiComplete.HasValue && m.MultiComplete.Value == false).ToList();
             List<Country> unnamedCountries = Data.GetCountries().Where(m => m.Name == "").ToList();
             AdminPageModel model = new AdminPageModel(multis, unnamedCountries);
-            return View(model);
+            return View(model); 
         }
 
         [HttpPost]
-        public String ImportPrayersFor(String str)
+        public String ImportPrayersFor(String str) // Imports data about countries that are praying for each other
         {
             //Import Country name to Country code reference file
             List<Chunk> chunks = Data.GetChunks();
@@ -36,6 +35,8 @@ namespace DOSMaps.Controllers
             {
                 List<Chunk> fromList = new List<Chunk>();
                 List<Chunk> toList = new List<Chunk>();
+
+                // Parse which kind of chunk it is, and create an object accordingly
                 Chunk fromChunk = chunks.Single(m => m.ID == row.ElementAt(0));
                 switch (fromChunk.Type)
                 {
@@ -56,7 +57,8 @@ namespace DOSMaps.Controllers
                         }
                     break;
                 }
-                //prayers.ToChunk_ID = row.ElementAt(2);
+
+                // Parse which kind of chunk it is, and create an object accordingly
                 Chunk toChunk = chunks.Single(m => m.ID == row.ElementAt(2));
                 switch (toChunk.Type)
                 {
@@ -77,6 +79,7 @@ namespace DOSMaps.Controllers
                         }
                     break;
                 }
+                //Every association needs a PrayersFor object
                 foreach(Chunk from in fromList)
                 {
                     foreach(Chunk to in toList)
@@ -98,7 +101,7 @@ namespace DOSMaps.Controllers
         }
 
         [HttpPost]
-        public String ImportConversions(String str)
+        public String ImportConversions(String str) // Import Country name -> Country code table
         {
             //Import Country name to Country code reference file
             List<String> conversions = str.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None).ToList();                                      // Split CSV by line
@@ -120,7 +123,7 @@ namespace DOSMaps.Controllers
         }
 
         [HttpPost]
-        public String UpdateMulti(String ID, String countryNames)
+        public String UpdateMulti(String ID, String countryNames) // Save a country object for each country in a multi
         {
             //Split saved country names by comma
             List<String> countryNameList = countryNames.Split(',').ToList().Where(m => m.Count() != 0).ToList();
@@ -128,6 +131,7 @@ namespace DOSMaps.Controllers
             List<Chunk> countryChunks = new List<Chunk>();
             List<Country> countries = new List<Country>();
             List<Continent> contintents = Data.GetContinents();
+            List<Conversion> conversions = Data.GetConversions();
             Chunk chunk = Data.GetChunk(ID);
             //Create a chunk and country for each name
             foreach (String countryName in countryNameList)
@@ -147,6 +151,13 @@ namespace DOSMaps.Controllers
                                                         prayerNeed: chunk.PrayerNeed,
                                                         prayerResource: chunk.PrayerResource,
                                                         multiChunk_ID: chunk.ID);
+                // If the country can be found in the conversion database, set it's code now
+                String countryCode = conversions.Where(m => m.CountryName == countryName).FirstOrDefault()?.Code;
+                if (countryCode != "" && countryCode != null)
+                {
+                    country.Name = country.GivenName;
+                    country.Code = countryCode;
+                }
                 countries.Add(country);
             }
             Data.SaveMulti(ID, countryChunks, countries); // Save to database
@@ -155,11 +166,11 @@ namespace DOSMaps.Controllers
         }
 
         [HttpPost]
-        public String UpdateCountryName(Guid ID, String countryName)
+        public String UpdateCountryName(Guid ID, String countryName) // Searches for country in conversion database, and assigns code if one is found
         {
             Country modify = Data.GetCountry(ID);
             List<Conversion> conversions = Data.GetConversions();
-            
+            // If the country can be found in the conversion database, set it's code now
             String countryCode = conversions.Where(m => m.CountryName == countryName).FirstOrDefault()?.Code;       //If that country name has an easily identified code, add it
             if (countryCode != "" && countryCode != null)
             {
@@ -171,14 +182,16 @@ namespace DOSMaps.Controllers
         }
 
         [HttpPost]
-        public String ImportData(String str)
+        public String ImportData(String str) // Imports all chunk, country, part, multi and percentage data into database
         {
             //Import data about prayer per country
             List<Conversion> conversions = Data.GetConversions();
             List<Continent> contintents = Data.GetContinents();
+
             List<String> input = str.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None).ToList();    // Split Tab delineated file by line
             List<List<String>> rows = input.Select(m => m.Split(new char[] { '\t' }).ToList()).ToList();        // Split each line by tab
             rows = rows.Where(m => m.Count() != 0).ToList();                                                    // Remove empty entries
+
             List<Chunk> chunkList = new List<Chunk>();
             List<Country> countryList = new List<Country>();
             List<Part> partList = new List<Part>();
@@ -193,6 +206,7 @@ namespace DOSMaps.Controllers
                                                 fullDescription: row.ElementAt(5),
                                                 prayerNeed: float.Parse(row.ElementAt(6).Replace("%", "")),                     // parse percentage by removing %
                                                 prayerResource: float.Parse(row.ElementAt(7).Replace("%", "")));
+
                 switch (chunk.Type)                                                                                             // Depending on the type, add rows in the database
                 {
                     case 0: //Part - An area of a country
@@ -225,7 +239,8 @@ namespace DOSMaps.Controllers
                                                         prayerNeed: 0.0,
                                                         prayerResource: 0.0);
 
-                            String cntryCode = conversions.Where(m => m.CountryName == cntryName).FirstOrDefault()?.Code;       //If that country name has an easily identified code, add it
+                            // If the country can be found in the conversion database, set it's code now
+                            String cntryCode = conversions.Where(m => m.CountryName == cntryName).FirstOrDefault()?.Code;
                             if (cntryCode != "" && cntryCode != null)
                             {
                                 cntry.Code = cntryCode;
@@ -238,14 +253,15 @@ namespace DOSMaps.Controllers
                         partList.Add(newPart);
                     break;
 
-                    case 1: //Cntry
+                    case 1: //Country 
                         Country country = Data.CreateCountry(ID: Guid.NewGuid(),
                                                             givenName: chunk.ShortName,
                                                             chunk_ID: chunk.ID,
                                                             prayerNeed: chunk.PrayerNeed,
                                                             prayerResource: chunk.PrayerResource);
 
-                        String code = conversions.Where(m => m.CountryName == chunk.ShortName).FirstOrDefault()?.Code;          //If that country name has an easily identified code, add it
+                        // If the country can be found in the conversion database, set it's code now
+                        String code = conversions.Where(m => m.CountryName == chunk.ShortName).FirstOrDefault()?.Code;
                         if (code != "" && code != null)
                         {
                             country.Code = code;
@@ -254,8 +270,8 @@ namespace DOSMaps.Controllers
                         countryList.Add(country);
                     break;
 
-                    case 2: //Multi
-                        chunk.MultiComplete = false;
+                    case 2: //Multi - multiple countries
+                        chunk.MultiComplete = false; // tag to allow admin to add countries later
                     break;
                 }
                 chunkList.Add(chunk);
@@ -266,21 +282,26 @@ namespace DOSMaps.Controllers
         }
 
         [HttpPost]
-        public String GetCountries()
+        public String GetCountries() // return all countries that can be identified by code
         {
             // Return all country rows
-            return JsonConvert.SerializeObject(Data.GetCountries().Where(m=>m.Name!=" "&&m.Name!="").ToList(), Formatting.None,
+            List<Country> countries = Data.GetCountries().Where(m => m.Name != " " && m.Name != "").ToList();
+            String result = JsonConvert.SerializeObject(countries, Formatting.None,
             new JsonSerializerSettings
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             });
+
+            return result;
         }
 
         [HttpPost]
-        public String GetPrayersFor()
+        public String GetPrayersFor() // return all prayersFor associations by country code: e.g. (".us", ".ca") VERY LARGE
         {
             // Return all country rows
-            return JsonConvert.SerializeObject(Data.GetPrayersFor(), Formatting.None,
+            List<Tuple<String, String>> list = Data.GetPrayersFor().Select(m => new Tuple<String, String>("."+m.Chunk.Countries.First().Code, "." + m.Chunk1.Countries.First().Code))
+                                                                    .Where(m=>m.Item1.Trim() != "." && m.Item2.Trim() != ".").ToList();
+            return JsonConvert.SerializeObject(list, Formatting.None,
             new JsonSerializerSettings
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore

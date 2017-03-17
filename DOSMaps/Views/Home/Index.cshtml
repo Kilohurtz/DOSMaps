@@ -2,35 +2,25 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="map">
+
     <h1>Interactive Church Map</h1>
+
     <div class="front">
-        <div id="perspective" class="world">
-
+        <div id="perspective" class="world"><!--SVG container-->
         </div>
-
-        <div class="components">
-            <!--
-            dropdown menu
-            -->
-            <select class="continents">
-                <option value="world">World</option>
-                <option value="asia">Asia</option>
-                <option value="africa">Africa</option>
-                <option value="oceania">Oceania</option>
-                <option value="europe">Europe</option>
-                <option value="north-america">North America</option>
-                <option value="south-america">South America</option>
-            </select>
-            <!--
-            radiobuttons
-            -->
-            <form class="toolbar">
-                <input id="r1" class="rbutton" type="radio" name="radiobuttons" value="pn">
-                <label for="r1">Prayer Needed</label>
-                <input id="r2" class="rbutton" type="radio" name="radiobuttons" value="pr">
-                <label for="r2">Prayer Resources</label>
+        
+        <div class="components"><!--Contain toolbar-->
+            <div id="legend" class="tooltiptext hide"><!--Color key-->
+                <span class="top">Most</span>
+                <span class="bottom">Least</span>
+            </div>
+            
+            <button id="key">Color Key</button><!--Color key button-->
+               
+            <form class="toolbar"><!--Radio buttons-->
+                <div><input id="r1" class="rbutton" type="radio" name="radiobuttons" value="pn">&nbsp;<label for="r1">Prayer Needed</label></div>
+                <div><input id="r2" class="rbutton" type="radio" name="radiobuttons" value="pr">&nbsp;<label for="r2">Prayer Resources</label></div>
+                <div><input id="r3" class="rbutton" type="radio" name="radiobuttons" value="ptf">&nbsp;<label for="r3">Prayer</label></div>
             </form>
         </div>
     </div> 
-</div>

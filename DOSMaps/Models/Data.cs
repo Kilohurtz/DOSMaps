@@ -56,7 +56,7 @@ namespace DOSMaps.Models
 
         public static void SetCreatedCountryPercents()
         {
-            // Set countries' percentages created by parts to the average of those percentages
+            // Set countries' percentages to the average of it's parts percentages
             DOSMapsDataContext dataContext = new DOSMapsDataContext();
             List<Country> countries = (from country in dataContext.Countries
                                        where country.PrayerNeed == 0.0

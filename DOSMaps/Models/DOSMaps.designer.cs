@@ -11,18 +11,18 @@
 
 namespace DOSMaps.Models
 {
-	using System.Data.Linq;
-	using System.Data.Linq.Mapping;
-	using System.Data;
-	using System.Collections.Generic;
-	using System.Reflection;
-	using System.Linq;
-	using System.Linq.Expressions;
-	using System.ComponentModel;
-	using System;
-	
-	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="DOSMaps")]
+    using System.Data.Linq;
+    using System.Data.Linq.Mapping;
+    using System.Data;
+    using System.Collections.Generic;
+    using System.Reflection;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using System.ComponentModel;
+    using System;
+    using Newtonsoft.Json;
+
+    [global::System.Data.Linq.Mapping.DatabaseAttribute(Name="DOSMaps")]
 	public partial class DOSMapsDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -138,8 +138,8 @@ namespace DOSMaps.Models
 		private System.Guid _ID;
 		
 		private string _Name;
-		
-		private EntitySet<Chunk> _Chunks;
+        [JsonIgnore]
+        private EntitySet<Chunk> _Chunks;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -196,8 +196,9 @@ namespace DOSMaps.Models
 				}
 			}
 		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Continent_Chunk", Storage="_Chunks", ThisKey="ID", OtherKey="Continent_ID")]
+
+        [JsonIgnore]
+        [global::System.Data.Linq.Mapping.AssociationAttribute(Name="Continent_Chunk", Storage="_Chunks", ThisKey="ID", OtherKey="Continent_ID")]
 		public EntitySet<Chunk> Chunks
 		{
 			get
@@ -784,14 +785,16 @@ namespace DOSMaps.Models
 		private double _PrayerResource;
 		
 		private System.Nullable<bool> _MultiComplete;
-		
-		private EntitySet<Part> _Parts;
-		
-		private EntitySet<PrayersFor> _PrayersFors;
-		
-		private EntitySet<PrayersFor> _PrayersFors1;
-		
-		private EntitySet<Country> _Countries;
+        [JsonIgnore]
+        private EntitySet<Part> _Parts;
+        [JsonIgnore]
+        private EntitySet<PrayersFor> _PrayersFors;
+        [JsonIgnore]
+        private EntitySet<PrayersFor> _PrayersFors1;
+        [JsonIgnore]
+        private EntitySet<Country> _Countries;
+        [JsonIgnore]
+        private EntitySet<Country> _Countries1;
 		
 		private EntityRef<Continent> _Continent;
 		
@@ -825,6 +828,7 @@ namespace DOSMaps.Models
 			this._PrayersFors = new EntitySet<PrayersFor>(new Action<PrayersFor>(this.attach_PrayersFors), new Action<PrayersFor>(this.detach_PrayersFors));
 			this._PrayersFors1 = new EntitySet<PrayersFor>(new Action<PrayersFor>(this.attach_PrayersFors1), new Action<PrayersFor>(this.detach_PrayersFors1));
 			this._Countries = new EntitySet<Country>(new Action<Country>(this.attach_Countries), new Action<Country>(this.detach_Countries));
+			this._Countries1 = new EntitySet<Country>(new Action<Country>(this.attach_Countries1), new Action<Country>(this.detach_Countries1));
 			this._Continent = default(EntityRef<Continent>);
 			OnCreated();
 		}
@@ -1012,8 +1016,9 @@ namespace DOSMaps.Models
 				}
 			}
 		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Chunk_Part", Storage="_Parts", ThisKey="ID", OtherKey="Chunk_ID")]
+
+        [JsonIgnore]
+        [global::System.Data.Linq.Mapping.AssociationAttribute(Name="Chunk_Part", Storage="_Parts", ThisKey="ID", OtherKey="Chunk_ID")]
 		public EntitySet<Part> Parts
 		{
 			get
@@ -1025,8 +1030,9 @@ namespace DOSMaps.Models
 				this._Parts.Assign(value);
 			}
 		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Chunk_PrayersFor", Storage="_PrayersFors", ThisKey="ID", OtherKey="FromChunk_ID")]
+
+        [JsonIgnore]
+        [global::System.Data.Linq.Mapping.AssociationAttribute(Name="Chunk_PrayersFor", Storage="_PrayersFors", ThisKey="ID", OtherKey="FromChunk_ID")]
 		public EntitySet<PrayersFor> PrayersFors
 		{
 			get
@@ -1038,8 +1044,9 @@ namespace DOSMaps.Models
 				this._PrayersFors.Assign(value);
 			}
 		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Chunk_PrayersFor1", Storage="_PrayersFors1", ThisKey="ID", OtherKey="ToChunk_ID")]
+
+        [JsonIgnore]
+        [global::System.Data.Linq.Mapping.AssociationAttribute(Name="Chunk_PrayersFor1", Storage="_PrayersFors1", ThisKey="ID", OtherKey="ToChunk_ID")]
 		public EntitySet<PrayersFor> PrayersFors1
 		{
 			get
@@ -1051,8 +1058,9 @@ namespace DOSMaps.Models
 				this._PrayersFors1.Assign(value);
 			}
 		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Chunk_Country", Storage="_Countries", ThisKey="ID", OtherKey="Chunk_ID")]
+
+        [JsonIgnore]
+        [global::System.Data.Linq.Mapping.AssociationAttribute(Name="Chunk_Country", Storage="_Countries", ThisKey="ID", OtherKey="Chunk_ID")]
 		public EntitySet<Country> Countries
 		{
 			get
@@ -1062,6 +1070,20 @@ namespace DOSMaps.Models
 			set
 			{
 				this._Countries.Assign(value);
+			}
+		}
+
+        [JsonIgnore]
+        [global::System.Data.Linq.Mapping.AssociationAttribute(Name="Chunk_Country1", Storage="_Countries1", ThisKey="ID", OtherKey="MultiChunk_ID")]
+		public EntitySet<Country> Countries1
+		{
+			get
+			{
+				return this._Countries1;
+			}
+			set
+			{
+				this._Countries1.Assign(value);
 			}
 		}
 		
@@ -1166,6 +1188,18 @@ namespace DOSMaps.Models
 			this.SendPropertyChanging();
 			entity.Chunk = null;
 		}
+		
+		private void attach_Countries1(Country entity)
+		{
+			this.SendPropertyChanging();
+			entity.Chunk1 = this;
+		}
+		
+		private void detach_Countries1(Country entity)
+		{
+			this.SendPropertyChanging();
+			entity.Chunk1 = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Country")]
@@ -1189,10 +1223,12 @@ namespace DOSMaps.Models
 		private double _PrayerResource;
 		
 		private string _MultiChunk_ID;
-		
-		private EntitySet<Part> _Parts;
-		
-		private EntityRef<Chunk> _Chunk;
+        [JsonIgnore]
+        private EntitySet<Part> _Parts;
+        [JsonIgnore]
+        private EntityRef<Chunk> _Chunk;
+        [JsonIgnore]
+        private EntityRef<Chunk> _Chunk1;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1220,6 +1256,7 @@ namespace DOSMaps.Models
 		{
 			this._Parts = new EntitySet<Part>(new Action<Part>(this.attach_Parts), new Action<Part>(this.detach_Parts));
 			this._Chunk = default(EntityRef<Chunk>);
+			this._Chunk1 = default(EntityRef<Chunk>);
 			OnCreated();
 		}
 		
@@ -1378,6 +1415,10 @@ namespace DOSMaps.Models
 			{
 				if ((this._MultiChunk_ID != value))
 				{
+					if (this._Chunk1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnMultiChunk_IDChanging(value);
 					this.SendPropertyChanging();
 					this._MultiChunk_ID = value;
@@ -1386,8 +1427,9 @@ namespace DOSMaps.Models
 				}
 			}
 		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Country_Part", Storage="_Parts", ThisKey="ID", OtherKey="Country_ID")]
+
+        [JsonIgnore]
+        [global::System.Data.Linq.Mapping.AssociationAttribute(Name="Country_Part", Storage="_Parts", ThisKey="ID", OtherKey="Country_ID")]
 		public EntitySet<Part> Parts
 		{
 			get
@@ -1430,6 +1472,40 @@ namespace DOSMaps.Models
 						this._Chunk_ID = default(string);
 					}
 					this.SendPropertyChanged("Chunk");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Chunk_Country1", Storage="_Chunk1", ThisKey="MultiChunk_ID", OtherKey="ID", IsForeignKey=true)]
+		public Chunk Chunk1
+		{
+			get
+			{
+				return this._Chunk1.Entity;
+			}
+			set
+			{
+				Chunk previousValue = this._Chunk1.Entity;
+				if (((previousValue != value) 
+							|| (this._Chunk1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Chunk1.Entity = null;
+						previousValue.Countries1.Remove(this);
+					}
+					this._Chunk1.Entity = value;
+					if ((value != null))
+					{
+						value.Countries1.Add(this);
+						this._MultiChunk_ID = value.ID;
+					}
+					else
+					{
+						this._MultiChunk_ID = default(string);
+					}
+					this.SendPropertyChanged("Chunk1");
 				}
 			}
 		}
