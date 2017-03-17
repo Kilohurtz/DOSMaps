@@ -12,7 +12,7 @@ Team Name - DOS & 1/2
 
  Project Origination-Larry Kraft (email:larrysteph@worksmail.net)
  Assistant expert- Bill Dickson (Phone: 719-209-8624)
- One Challenge representive - Scott Cost (email:scottc@worksmail.net
+ One Challenge representive - Scott Cost (email:scottc@worksmail.net)
 
  project start: March 13,2017 for LightSys Code-A-Thon
  Expected Finish Date: March 17, 2017
@@ -49,7 +49,14 @@ Project scope:
     Javascripts dealing with server communication.
     
     
-   
+    End projects notes
+    
+    At time of completion, The website preformed as expected with google chrome, mostly so on firefox, but encountered issues with navigation features on Safari. 
+    
+    certain tertiary features, such as a selector to have rapid change of view windows, were forestalled for times sake. Updating source data stored on the server to have information organized strictly by country should be a high priority. 
+    
+    for previous version uploads, use the Github registry timeline. 
+    
   
  
   
