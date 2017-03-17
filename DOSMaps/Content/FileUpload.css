@@ -1,9 +1,11 @@
 ﻿.map-body{
     background:none;
+    border:none;
 }
-.multi{
-    width:420px;
+.multi, .country{
     margin-bottom:10px;
+    border-bottom: 1px solid #ccc;
+    padding: 5px 0;
 }
 .plus{
     display:inline-block;
@@ -25,6 +27,25 @@
 .country-name{
     margin-right:5px;
 }
-.save-multi{
+.save-multi, .save-country-name{
     float:right;
+}
+.container{
+    width:100%;
+    height:100vh;
+    display: flex;
+    flex-direction: column;
+}
+.files-section{
+    flex-basis:170px;
+}
+.two-column{
+    display: flex;
+    justify-content: space-between;
+    height:100%;
+}
+.two-column > div {
+    height: 100%;
+    overflow-y: scroll;
+    padding-right:20px;
 }
