@@ -42,6 +42,7 @@ III.  select "continentMenu"
  Has 6 dropdown options, one for each permanetly inhabitated contenint
  Upon the selection of a continent, Calls the dropdownEvent() method (see section VI.D)  and stores the continent name in its value
  calls the method each time the dropdown value changes
+   *note* this feature has been discontinued in latest version, but base codeing for event handling is still in previous versions
 
 Values within "continentMenu"
  id="continentMenu"
@@ -54,21 +55,24 @@ IV. <form>
 
  This sequence is created exclusively for debugging. Its purpose is to test whether eventhandlers are functioning properly.
  
-  IV.A <p dropdownNotice>
+  IV.A <p dropdownNotice>*
    The debugging notifier for showing whether the dropdown event handler and functions are operating properly 
    (See sections III and VI.D respectivly)
  
-  IV.B <p infobut1> 
+ 
+  IV.B <p infobut1> *
    The debugging notifier for showing if radio butto 1 is currently selected, should update dynamically.
    (see section V.A and VI.A for relevent information)
    
-  IV.B <p infobut2> 
+  IV.B <p infobut2> *
    The debugging notifier for showing if radio butto 2 is currently selected, should update dynamically.
    (see section V.B and VI.B for relevent information) 
  
-  IV.B <p infobut3> 
+  IV.B <p infobut3> *
    The debugging notifier for showing if radio butto 3 is currently selected, should update dynamically.
    (see section V.C and VI.C for relevent information)
+ 
+ *currently not in published code , but available in archived versions
  
  
  
@@ -90,7 +94,7 @@ IV. <form>
     described with text "reciving prayers from." when selected, calls the "replacetext3()" method (see section VI.C)
     
     
- VI. Javascript functions
+ VI. Javascript functions *note* these debugging functions have been discontinued, but are still available in archived versions
     These are the functions called by the eventhandlers throughout the HTML document. currently they just replace text, when combined with the javascripts of diffrent sections,they will communicate with the server.
     *Note*
     /* In comments are methods using jQuery, they are currently non-functional, but in theory would accomplish the same tasks as current functions.*/
