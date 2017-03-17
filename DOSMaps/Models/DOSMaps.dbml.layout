@@ -39,37 +39,37 @@
         <elementListCompartment Id="1ddc3dc2-288c-4f80-aeb1-c8bb335c1226" absoluteBounds="1.6400000000000001, 4.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="63965c1b-5cc9-410a-afac-acf3b4df6886" absoluteBounds="3.5, 0.875, 2, 2.3478011067708335">
+    <classShape Id="c223d052-9959-4c99-96a4-22e0819b480d" absoluteBounds="3.5, 0.5, 2, 2.5401025390625">
       <DataClassMoniker Name="/DOSMapsDataContext/Chunk" />
       <nestedChildShapes>
-        <elementListCompartment Id="e6d3d035-eb71-4082-868b-dc09e6d8956a" absoluteBounds="3.5149999999999997, 1.335, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="df4dcdf2-b70d-46be-aa3a-8ed85bb206b8" absoluteBounds="3.5149999999999997, 0.96, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.5 : 1.76524983723958); (6.25 : 1.76524983723958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 1.57774983723958); (6.25 : 1.57774983723958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/DOSMapsDataContext/Chunk/Chunk_Country" />
       <nodes>
-        <classShapeMoniker Id="63965c1b-5cc9-410a-afac-acf3b4df6886" />
+        <classShapeMoniker Id="c223d052-9959-4c99-96a4-22e0819b480d" />
         <classShapeMoniker Id="22fdafa3-cf50-458e-bed2-218f3b2be53d" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(5.5 : 2.8694482421875); (9 : 2.8694482421875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/DOSMapsDataContext/Chunk/Chunk_Part" />
       <nodes>
-        <classShapeMoniker Id="63965c1b-5cc9-410a-afac-acf3b4df6886" />
+        <classShapeMoniker Id="c223d052-9959-4c99-96a4-22e0819b480d" />
         <classShapeMoniker Id="a320a8b0-309e-4cad-9038-1766cd9d0933" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(4.5 : 3.22280110677083); (4.5 : 3.5); (4.05208133333333 : 3.5 : JumpStart); (3.88541466666667 : 3.5 : JumpEnd); (2.625 : 3.5); (2.625 : 3.875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(4.0937505 : 3.0401025390625); (4.0937505 : 3.90625); (3.625 : 3.90625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/DOSMapsDataContext/Chunk/Chunk_PrayersFor" />
       <nodes>
-        <classShapeMoniker Id="63965c1b-5cc9-410a-afac-acf3b4df6886" />
+        <classShapeMoniker Id="c223d052-9959-4c99-96a4-22e0819b480d" />
         <classShapeMoniker Id="7cad9f9d-59d8-4c6b-add3-2eea0951ac1b" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3.968748 : 3.22280110677083); (3.968748 : 3.625); (3.156252 : 3.625); (3.156252 : 3.875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(4.35937775 : 3.0401025390625); (4.35937775 : 3.890625); (3.625 : 3.890625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/DOSMapsDataContext/Chunk/Chunk_PrayersFor1" />
       <nodes>
-        <classShapeMoniker Id="63965c1b-5cc9-410a-afac-acf3b4df6886" />
+        <classShapeMoniker Id="c223d052-9959-4c99-96a4-22e0819b480d" />
         <classShapeMoniker Id="7cad9f9d-59d8-4c6b-add3-2eea0951ac1b" />
       </nodes>
     </associationConnector>
@@ -77,7 +77,7 @@
       <AssociationMoniker Name="/DOSMapsDataContext/Continent/Continent_Chunk" />
       <nodes>
         <classShapeMoniker Id="1c33b7b3-123e-4b83-8954-e928cd059be4" />
-        <classShapeMoniker Id="63965c1b-5cc9-410a-afac-acf3b4df6886" />
+        <classShapeMoniker Id="c223d052-9959-4c99-96a4-22e0819b480d" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

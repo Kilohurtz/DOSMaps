@@ -9,6 +9,14 @@ namespace DOSMaps.Controllers
 {
     public class AJAXController : Controller
     {
+        public ActionResult Index()
+        {
+            
+            List<Chunk> multis = Data.GetMultis().Where(m => m.MultiComplete.HasValue && m.MultiComplete.Value == false).ToList();
+            List<Country> unnamedCountries = Data.GetCountries().Where(m => m.Name == "").ToList();
+            AdminPageModel model = new AdminPageModel(multis, unnamedCountries);
+            return View(model);
+        }
 
         [HttpPost]
         public String ImportConversions(String str)
@@ -30,6 +38,56 @@ namespace DOSMaps.Controllers
             Data.SaveConversions(conversionList); // Save to database
             
             return "success!";
+        }
+
+        [HttpPost]
+        public String UpdateMulti(String ID, String countryNames)
+        {
+            //Split saved country names by comma
+            List<String> countryNameList = countryNames.Split(',').ToList().Where(m => m.Count() != 0).ToList();
+            List<Country> allCountries = Data.GetCountries();
+            List<Chunk> countryChunks = new List<Chunk>();
+            List<Country> countries = new List<Country>();
+            List<Continent> contintents = Data.GetContinents();
+            Chunk chunk = Data.GetChunk(ID);
+            //Create a chunk and country for each name
+            foreach (String countryName in countryNameList)
+            {
+                Chunk countryChunk = Data.CreateChunk(ID: "A" + (allCountries.Count() + countries.Count() + 1).ToString().PadLeft(3, '0'),
+                                                type: 2,
+                                                continent_ID: chunk.Continent_ID, 
+                                                shortName: countryName,
+                                                longName: countryName,
+                                                fullDescription: countryName,
+                                                prayerNeed: chunk.PrayerNeed,                     
+                                                prayerResource: chunk.PrayerResource);
+                countryChunks.Add(countryChunk);
+                Country country = Data.CreateCountry(ID: Guid.NewGuid(),
+                                                        givenName: countryName,
+                                                        chunk_ID: countryChunk.ID,
+                                                        prayerNeed: chunk.PrayerNeed,
+                                                        prayerResource: chunk.PrayerResource);
+                countries.Add(country);
+            }
+            Data.SaveMulti(ID, countryChunks, countries); // Save to database
+
+            return "success!";
+        }
+
+        [HttpPost]
+        public String UpdateCountryName(Guid ID, String countryName)
+        {
+            Country modify = Data.GetCountry(ID);
+            List<Conversion> conversions = Data.GetConversions();
+            
+            String countryCode = conversions.Where(m => m.CountryName == countryName).FirstOrDefault()?.Code;       //If that country name has an easily identified code, add it
+            if (countryCode != "" && countryCode != null)
+            {
+                Data.SaveCountryName(ID, countryName, countryCode); // Save to database
+                return "success!";
+            }
+
+            return "couldn't find name.";
         }
 
         [HttpPost]
@@ -71,7 +129,7 @@ namespace DOSMaps.Controllers
                         }
                         else
                         {                                                                                                       // If there is no country with that name, create one with it's own chunk
-                            Chunk cntryChunk = Data.CreateChunk(ID: "L" + (countryList.Count() + 1).ToString().PadLeft(3, '0'),
+                            Chunk cntryChunk = Data.CreateChunk(ID: "B" + (countryList.Count() + 1).ToString().PadLeft(3, '0'),
                                                                 type: 1,
                                                                 continent_ID: chunk.Continent_ID,
                                                                 shortName: cntryName,
@@ -117,7 +175,7 @@ namespace DOSMaps.Controllers
                     break;
 
                     case 2: //Multi
-                        //Do nothing but cry.
+                        chunk.MultiComplete = false;
                     break;
                 }
                 chunkList.Add(chunk);

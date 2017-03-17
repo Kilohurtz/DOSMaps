@@ -1,0 +1,30 @@
+﻿.map-body{
+    background:none;
+}
+.multi{
+    width:420px;
+    margin-bottom:10px;
+}
+.plus{
+    display:inline-block;
+    width:15px;
+    height:15px;
+    padding-left:3px;
+    padding-top:0px;
+    line-height:15px;
+    background-color: #0000aa;
+    color:white;
+    border-radius:10px;
+    text-decoration:none;
+    cursor: pointer;
+    user-select: none;
+}
+.plus:hover{
+    text-decoration:none;
+}
+.country-name{
+    margin-right:5px;
+}
+.save-multi{
+    float:right;
+}

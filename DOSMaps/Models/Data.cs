@@ -8,6 +8,29 @@ namespace DOSMaps.Models
 {
     public class Data
     {
+        public static void SaveMulti(String ID, List<Chunk> countryChunks, List<Country> countries)
+        {
+            DOSMapsDataContext dataContext = new DOSMapsDataContext();
+            dataContext.Countries.InsertAllOnSubmit(countries);
+            dataContext.Chunks.InsertAllOnSubmit(countryChunks);
+            Chunk modified = (from chunk in dataContext.Chunks
+                                where chunk.ID == ID
+                                select chunk).SingleOrDefault();
+            modified.MultiComplete = true;
+            dataContext.SubmitChanges();
+        }
+
+        public static void SaveCountryName(Guid ID, String countryName, String countryCode)
+        {
+            DOSMapsDataContext dataContext = new DOSMapsDataContext();
+            Country modified = (from country in dataContext.Countries
+                              where country.ID == ID
+                              select country).SingleOrDefault();
+            modified.Name = countryName;
+            modified.Code = countryCode;
+            dataContext.SubmitChanges();
+        }
+
         public static void SaveConversions(List<Conversion> conversions)
         {
             DOSMapsDataContext dataContext = new DOSMapsDataContext();
@@ -72,10 +95,38 @@ namespace DOSMaps.Models
             DOSMapsDataContext dataContext = new DOSMapsDataContext();
             List<Country> countries = (from country in dataContext.Countries
                                         join chunk in dataContext.Chunks on country.Chunk_ID equals chunk.ID
-                                        join part in dataContext.Parts on country.ID equals part.Country_ID
+                                        join part in dataContext.Parts on country.ID equals part.Country_ID into parts
+                                            from part in parts.DefaultIfEmpty()
                                         select country).ToList();
 
             return countries;
+        }
+
+        public static List<Chunk> GetMultis()
+        {
+            DOSMapsDataContext dataContext = new DOSMapsDataContext();
+            List<Chunk> multis = (from chunk in dataContext.Chunks
+                                  where chunk.Type == 2
+                                  select chunk).ToList();
+            return multis;
+        }
+
+        public static Chunk GetChunk(String ID)
+        {
+            DOSMapsDataContext dataContext = new DOSMapsDataContext();
+            Chunk result = (from chunk in dataContext.Chunks
+                            where chunk.ID == ID
+                            select chunk).SingleOrDefault();
+            return result;
+        }
+
+        public static Country GetCountry(Guid ID)
+        {
+            DOSMapsDataContext dataContext = new DOSMapsDataContext();
+            Country result = (from country in dataContext.Countries
+                            where country.ID == ID
+                            select country).SingleOrDefault();
+            return result;
         }
 
         public static Chunk CreateChunk(String ID, int type, Guid? continent_ID, String shortName, String longName, String fullDescription, double prayerNeed, double prayerResource)
