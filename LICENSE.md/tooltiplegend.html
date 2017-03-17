@@ -1,0 +1,43 @@
+<!DOCTYPE>
+<html>
+<style>
+
+    
+        
+
+
+    #legend{
+        max-width: 10%;
+        background:linear-gradient(to bottom, #C8C8FF,#000032);   
+        display:none; 
+        text-align: center;
+    }
+         
+    
+</style>
+<body>
+   <div id=legend class="tooltiptext" ><p style="color:white" text-align:center>most dense<br><br>          <br>least dense</div>
+   
+    <button id="legendact" class="tooltip" onclick="toggleVisibility('legend')">hover over me
+        
+    </button> 
+    
+</body>
+    
+    
+    <script>
+function toggleVisibility(id) {
+   var e = document.getElementById(id);
+   // e.style.display = e.style.display == "none" ? "inline-block" : "none";
+       if(e.style.display == 'block')
+      e.style.display = 'none';
+   else
+      e.style.display = 'block';
+}
+</script>
+
+    
+    
+    
+    
+</html>
