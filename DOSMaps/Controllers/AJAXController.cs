@@ -19,6 +19,85 @@ namespace DOSMaps.Controllers
         }
 
         [HttpPost]
+        public String ImportPrayersFor(String str)
+        {
+            //Import Country name to Country code reference file
+            List<Chunk> chunks = Data.GetChunks();
+            List<Country> countries = Data.GetCountries();
+            List<Part> parts = Data.GetParts();
+            List<Chunk> multis = Data.GetMultis();
+            List<String> prayerRows = str.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None).ToList();                                       // Split CSV by line
+            List<List<String>> rows = prayerRows.Select(m => m.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).ToList()).ToList();     // Split each line by ','
+            rows = rows.Where(m => m.Count() != 0).ToList();                                                                                            // Remove empty entries
+            List<PrayersFor> prayersList = new List<PrayersFor>();
+
+            //Create a database row for each entry in the CSV
+            foreach (List<String> row in rows)
+            {
+                List<Chunk> fromList = new List<Chunk>();
+                List<Chunk> toList = new List<Chunk>();
+                Chunk fromChunk = chunks.Single(m => m.ID == row.ElementAt(0));
+                switch (fromChunk.Type)
+                {
+                    case 0: //Part
+                        Part fromPart = parts.Single(m => m.Chunk_ID == fromChunk.ID);
+                        Country fromPartCountry = countries.Single(m => m.ID == fromPart.Country_ID);
+                        Chunk fromPartCountryChunk = chunks.Single(m => m.ID == fromPartCountry.Chunk_ID);
+                        fromList.Add(fromPartCountryChunk);
+                        break;
+                    case 1: //Country
+                        fromList.Add(fromChunk);
+                        break;
+                    case 2: //Multi
+                        foreach(Country country in fromChunk.Countries)
+                        {
+                            Chunk fromMultiCountryChunk = chunks.Single(m => m.ID == country.Chunk_ID);
+                            fromList.Add(fromMultiCountryChunk);
+                        }
+                    break;
+                }
+                //prayers.ToChunk_ID = row.ElementAt(2);
+                Chunk toChunk = chunks.Single(m => m.ID == row.ElementAt(2));
+                switch (toChunk.Type)
+                {
+                    case 0: //Part
+                        Part toPart = parts.Single(m => m.Chunk_ID == toChunk.ID);
+                        Country toPartCountry = countries.Single(m => m.ID == toPart.Country_ID);
+                        Chunk toPartCountryChunk = chunks.Single(m => m.ID == toPartCountry.Chunk_ID);
+                        toList.Add(toPartCountryChunk);
+                    break;
+                    case 1: //Country
+                        toList.Add(toChunk);
+                    break;
+                    case 2: //Multi
+                        foreach (Country country in toChunk.Countries)
+                        {
+                            Chunk toMultiCountryChunk = chunks.Single(m => m.ID == country.Chunk_ID);
+                            toList.Add(toMultiCountryChunk);
+                        }
+                    break;
+                }
+                foreach(Chunk from in fromList)
+                {
+                    foreach(Chunk to in toList)
+                    {
+                        PrayersFor prayersFor = new PrayersFor();
+                        prayersFor.ID = Guid.NewGuid();
+                        prayersFor.FromChunk_ID = from.ID;
+                        prayersFor.ToChunk_ID = to.ID;
+                        if(!prayersList.Exists(m => m.FromChunk_ID == prayersFor.FromChunk_ID && m.ToChunk_ID == prayersFor.ToChunk_ID))
+                        {
+                            prayersList.Add(prayersFor);
+                        }
+                    }
+                }
+            }
+            Data.SavePrayersFor(prayersList); // Save to database
+
+            return "success!";
+        }
+
+        [HttpPost]
         public String ImportConversions(String str)
         {
             //Import Country name to Country code reference file
@@ -66,7 +145,8 @@ namespace DOSMaps.Controllers
                                                         givenName: countryName,
                                                         chunk_ID: countryChunk.ID,
                                                         prayerNeed: chunk.PrayerNeed,
-                                                        prayerResource: chunk.PrayerResource);
+                                                        prayerResource: chunk.PrayerResource,
+                                                        multiChunk_ID: chunk.ID);
                 countries.Add(country);
             }
             Data.SaveMulti(ID, countryChunks, countries); // Save to database
@@ -189,7 +269,18 @@ namespace DOSMaps.Controllers
         public String GetCountries()
         {
             // Return all country rows
-            return JsonConvert.SerializeObject(Data.GetCountries(), Formatting.None,
+            return JsonConvert.SerializeObject(Data.GetCountries().Where(m=>m.Name!=" "&&m.Name!="").ToList(), Formatting.None,
+            new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+        }
+
+        [HttpPost]
+        public String GetPrayersFor()
+        {
+            // Return all country rows
+            return JsonConvert.SerializeObject(Data.GetPrayersFor(), Formatting.None,
             new JsonSerializerSettings
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore

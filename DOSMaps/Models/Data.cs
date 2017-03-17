@@ -38,6 +38,13 @@ namespace DOSMaps.Models
             dataContext.SubmitChanges();
         }
 
+        public static void SavePrayersFor(List<PrayersFor> prayersFor)
+        {
+            DOSMapsDataContext dataContext = new DOSMapsDataContext();
+            dataContext.PrayersFors.InsertAllOnSubmit(prayersFor);
+            dataContext.SubmitChanges();
+        }
+
         public static void SaveData(List<Part> parts, List<Country> countries, List<Chunk> chunks)
         {
             DOSMapsDataContext dataContext = new DOSMapsDataContext();
@@ -97,7 +104,7 @@ namespace DOSMaps.Models
                                         join chunk in dataContext.Chunks on country.Chunk_ID equals chunk.ID
                                         join part in dataContext.Parts on country.ID equals part.Country_ID into parts
                                             from part in parts.DefaultIfEmpty()
-                                        select country).ToList();
+                                        select country).Distinct().ToList();
 
             return countries;
         }
@@ -107,8 +114,34 @@ namespace DOSMaps.Models
             DOSMapsDataContext dataContext = new DOSMapsDataContext();
             List<Chunk> multis = (from chunk in dataContext.Chunks
                                   where chunk.Type == 2
+                                  join country in dataContext.Countries on chunk.ID equals country.MultiChunk_ID into countries
+                                        from country in countries.DefaultIfEmpty()
                                   select chunk).ToList();
             return multis;
+        }
+
+        public static List<Chunk> GetChunks()
+        {
+            DOSMapsDataContext dataContext = new DOSMapsDataContext();
+            List<Chunk> result = (from chunk in dataContext.Chunks
+                                  select chunk).ToList();
+            return result;
+        }
+
+        public static List<Part> GetParts()
+        {
+            DOSMapsDataContext dataContext = new DOSMapsDataContext();
+            List<Part> result = (from part in dataContext.Parts
+                                  select part).ToList();
+            return result;
+        }
+
+        public static List<PrayersFor> GetPrayersFor()
+        {
+            DOSMapsDataContext dataContext = new DOSMapsDataContext();
+            List<PrayersFor> result = (from prayersFor in dataContext.PrayersFors
+                                 select prayersFor).ToList();
+            return result;
         }
 
         public static Chunk GetChunk(String ID)
@@ -147,7 +180,7 @@ namespace DOSMaps.Models
             return c;
         }
 
-        public static Country CreateCountry(Guid ID, String chunk_ID, String givenName, double prayerNeed, double prayerResource)
+        public static Country CreateCountry(Guid ID, String chunk_ID, String givenName, double prayerNeed, double prayerResource, String multiChunk_ID = null)
         {
             // Custom constructor for a generated class
             Country country = new Country();
@@ -158,6 +191,7 @@ namespace DOSMaps.Models
             country.Code = "";
             country.PrayerNeed = prayerNeed;
             country.PrayerResource = prayerResource;
+            country.MultiChunk_ID = multiChunk_ID;
 
             return country;
         }

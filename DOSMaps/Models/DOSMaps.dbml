@@ -13,19 +13,6 @@
       <Column Name="CountryName" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
-  <Table Name="dbo.Country" Member="Countries">
-    <Type Name="Country">
-      <Column Name="ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="GivenName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Chunk_ID" Type="System.String" DbType="NChar(4) NOT NULL" CanBeNull="false" />
-      <Column Name="Code" Type="System.String" DbType="NChar(2) NOT NULL" CanBeNull="false" />
-      <Column Name="PrayerNeed" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="PrayerResource" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Association Name="Country_Part" Member="Parts" ThisKey="ID" OtherKey="Country_ID" Type="Part" />
-      <Association Name="Chunk_Country" Member="Chunk" ThisKey="Chunk_ID" OtherKey="ID" Type="Chunk" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Part" Member="Parts">
     <Type Name="Part">
       <Column Name="ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -33,8 +20,8 @@
       <Column Name="Chunk_ID" Type="System.String" DbType="NChar(4) NOT NULL" CanBeNull="false" />
       <Column Name="PrayerNeed" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="PrayerResource" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Association Name="Country_Part" Member="Country" ThisKey="Country_ID" OtherKey="ID" Type="Country" IsForeignKey="true" />
       <Association Name="Chunk_Part" Member="Chunk" ThisKey="Chunk_ID" OtherKey="ID" Type="Chunk" IsForeignKey="true" />
+      <Association Name="Country_Part" Member="Country" ThisKey="Country_ID" OtherKey="ID" Type="Country" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.PrayersFor" Member="PrayersFors">
@@ -57,11 +44,25 @@
       <Column Name="PrayerNeed" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="PrayerResource" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="MultiComplete" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Association Name="Chunk_Country" Member="Countries" ThisKey="ID" OtherKey="Chunk_ID" Type="Country" />
       <Association Name="Chunk_Part" Member="Parts" ThisKey="ID" OtherKey="Chunk_ID" Type="Part" />
       <Association Name="Chunk_PrayersFor" Member="PrayersFors" ThisKey="ID" OtherKey="FromChunk_ID" Type="PrayersFor" />
       <Association Name="Chunk_PrayersFor1" Member="PrayersFors1" ThisKey="ID" OtherKey="ToChunk_ID" Type="PrayersFor" />
+      <Association Name="Chunk_Country" Member="Countries" ThisKey="ID" OtherKey="Chunk_ID" Type="Country" />
       <Association Name="Continent_Chunk" Member="Continent" ThisKey="Continent_ID" OtherKey="ID" Type="Continent" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Country" Member="Countries">
+    <Type Name="Country">
+      <Column Name="ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="GivenName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Chunk_ID" Type="System.String" DbType="NChar(4) NOT NULL" CanBeNull="false" />
+      <Column Name="Code" Type="System.String" DbType="NChar(2) NOT NULL" CanBeNull="false" />
+      <Column Name="PrayerNeed" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="PrayerResource" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="MultiChunk_ID" Type="System.String" DbType="NChar(4)" CanBeNull="true" />
+      <Association Name="Country_Part" Member="Parts" ThisKey="ID" OtherKey="Country_ID" Type="Part" />
+      <Association Name="Chunk_Country" Member="Chunk" ThisKey="Chunk_ID" OtherKey="ID" Type="Chunk" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

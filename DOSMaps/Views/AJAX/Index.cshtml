@@ -8,18 +8,18 @@
     <div class="files-section">
         <h2>Upload Files & Correct Names</h2>
         Conversions <input class="conversions" name="files[]" multiple="" type="file" /><br />
+        Prayers For <input class="prayers-for" name="files[]" multiple="" type="file" /><br />
         Test Data <input class="testData" name="files[]" multiple="" type="file" />
     </div>
     <div class="two-column">
-        <div>
+        <div class="left-column">
             <h3>Enter the name of each country listed</h3>
             @foreach (Chunk multi in Model.Multis)
             {
                 <div class="multi" id="@multi.ID">
                     <span>@multi.FullDescription</span> <a class="plus">+</a><br />
                     <input type="button" value="Save" class="save-multi" />
-                    <input placeholder="Country Name" class="country-name" />
-                </div>
+                    <input placeholder="Country Name" class="country-name" /></div>
             }
         </div>
         <div>
@@ -29,8 +29,7 @@
                 <div class="country" id="@country.ID">
                     <span>@country.GivenName</span><br />
                     <input type="button" value="Save" class="save-country-name" />
-                    <input placeholder="Country Name" class="country-name" />
-                </div>
+                    <input placeholder="Country Name" class="country-name" /></div>
             }
         </div>
     </div>

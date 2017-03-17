@@ -7,6 +7,9 @@
     border-bottom: 1px solid #ccc;
     padding: 5px 0;
 }
+.left-column{
+    width:455px;
+}
 .plus{
     display:inline-block;
     width:15px;

@@ -179,12 +179,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DOSMaps.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Models\FileUploadModel.cs" />
-    <Compile Include="Models\Parser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Bkgd.png" />
+    <Content Include="Content\BkgdF.png" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\FileUpload.css" />
@@ -192,6 +192,11 @@
     <Content Include="Content\Map.svg" />
     <Content Include="Content\DosMaps.css" />
     <Content Include="Content\views.css" />
+    <Content Include="ExtraFiles\DosMaps.css" />
+    <Content Include="ExtraFiles\DosMaps.html" />
+    <Content Include="ExtraFiles\DosMaps.js" />
+    <Content Include="ExtraFiles\Map.css" />
+    <Content Include="ExtraFiles\Map.svg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

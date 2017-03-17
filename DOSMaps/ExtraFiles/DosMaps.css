@@ -4,12 +4,14 @@
 body {
     background-image: url("Bkgd.png");
     background-repeat: repeat;
+    user-select:none;
 }
 
 #perspective {
 	overflow:hidden;
 	width:100%;
 	position:relative;
+    user-select:none;
 }
 
 h1 { 
