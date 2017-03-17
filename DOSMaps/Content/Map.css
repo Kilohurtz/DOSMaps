@@ -67,7 +67,7 @@
 .landxx
 {
    fill: #897b4c;
-   stroke:#ffffff;
+   stroke:#000;
    stroke-width:0.5;
    fill-rule:evenodd;
 }
@@ -112,10 +112,14 @@
 {
    opacity: 1;
    color: #000000;
-   fill:#f2f9ff;
+   fill:#f2fff0;
    stroke:#000;
    stroke-width:0.5;
    stroke-miterlimit:1;
+}
+
+.landxx:hover{
+    fill:yellow!important;
 }
 
 /*
