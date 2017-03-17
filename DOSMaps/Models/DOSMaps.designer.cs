@@ -1058,6 +1058,8 @@ namespace DOSMaps.Models
 		
 		private double _PrayerResource;
 		
+		private System.Nullable<bool> _MultiComplete;
+		
 		private EntitySet<Country> _Countries;
 		
 		private EntitySet<Part> _Parts;
@@ -1088,6 +1090,8 @@ namespace DOSMaps.Models
     partial void OnPrayerNeedChanged();
     partial void OnPrayerResourceChanging(double value);
     partial void OnPrayerResourceChanged();
+    partial void OnMultiCompleteChanging(System.Nullable<bool> value);
+    partial void OnMultiCompleteChanged();
     #endregion
 		
 		public Chunk()
@@ -1140,7 +1144,7 @@ namespace DOSMaps.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShortName", DbType="NVarChar(12) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShortName", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
 		public string ShortName
 		{
 			get
@@ -1160,7 +1164,7 @@ namespace DOSMaps.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LongName", DbType="NVarChar(40) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LongName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string LongName
 		{
 			get
@@ -1260,6 +1264,26 @@ namespace DOSMaps.Models
 					this._PrayerResource = value;
 					this.SendPropertyChanged("PrayerResource");
 					this.OnPrayerResourceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MultiComplete", DbType="Bit")]
+		public System.Nullable<bool> MultiComplete
+		{
+			get
+			{
+				return this._MultiComplete;
+			}
+			set
+			{
+				if ((this._MultiComplete != value))
+				{
+					this.OnMultiCompleteChanging(value);
+					this.SendPropertyChanging();
+					this._MultiComplete = value;
+					this.SendPropertyChanged("MultiComplete");
+					this.OnMultiCompleteChanged();
 				}
 			}
 		}
